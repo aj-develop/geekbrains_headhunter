@@ -1,0 +1,19 @@
+{
+  "name": "geekjob",
+  "version": "1.0.0",
+  "description": "Выпускной проект - Headhunter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/talinsk/geekbrains_headhunter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/talinsk/geekbrains_headhunter/issues"
+  },
+  "homepage": "https://github.com/talinsk/geekbrains_headhunter#readme"
+}
