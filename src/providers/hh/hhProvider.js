@@ -37,15 +37,18 @@ export class HHprovider extends Provider {
 
     convertVacancyResponse(item) {
         let salary = '';
-        let currency = '';
+        let salary_from = null;
+        let salary_to = null;
+        let currency = null;
         if (item.salary) {
             salary += item.salary.from ? `[${item.salary.from},` : '[,';
             salary += item.salary.to ? `${item.salary.to}]` : ')';
             currency = item.salary.currency;
+            salary_from = item.salary.from;
+            salary_to = item.salary.to;
         }
         else {
             salary = null;
-            currency = null;
         }
         return new Vacancy(
             HHprovider.name,
@@ -53,11 +56,14 @@ export class HHprovider extends Provider {
             item.name,
             item.employer.logo_urls ? item.employer.logo_urls[90] : null,
             salary,
+            salary_from,
+            salary_to,
             currency,
             item.published_at,
             item.area.name,
             item.snippet.requirement,
             item.snippet.responsibility,
+            item.alternate_url,
             0
         )
     }
