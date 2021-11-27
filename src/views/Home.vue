@@ -1,57 +1,7 @@
 <template>
   <div class="container">
     <header class="main-header">
-      <div class="header-top-row">
-        <a href="#" class="logo">
-          <svg
-            class="logo-svg"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            width="64"
-            height="56"
-            viewBox="0 0 64 56"
-          >
-            <path
-              d="M52.873,55.128 L58.125,45.939 L63.377,55.128 L52.873,55.128 ZM46.303,45.172 L56.811,45.172 L51.557,54.359 L46.303,45.172 ZM51.557,34.451 L56.811,43.641 L46.303,43.641 L51.557,34.451 ZM39.738,33.686 L50.243,33.686 L44.990,42.874 L39.738,33.686 ZM44.990,22.967 L50.243,32.154 L39.738,32.154 L44.990,22.967 ZM33.168,22.202 L43.676,22.202 L38.422,31.390 L33.168,22.202 ZM38.422,11.480 L43.676,20.671 L33.168,20.671 L38.422,11.480 ZM26.600,10.713 L37.108,10.713 L31.854,19.905 L26.600,10.713 ZM31.854,-0.006 L37.108,9.184 L26.600,9.184 L31.854,-0.006 ZM20.032,20.671 L25.286,11.480 L30.540,20.671 L20.032,20.671 ZM13.465,32.154 L18.718,22.967 L23.971,32.154 L13.465,32.154 ZM6.897,43.641 L12.151,34.451 L17.404,43.641 L6.897,43.641 ZM0.331,55.128 L5.582,45.939 L10.836,55.128 L0.331,55.128 ZM17.404,45.172 L12.151,54.359 L6.897,45.172 L17.404,45.172 ZM23.971,33.686 L18.718,42.874 L13.465,33.686 L23.971,33.686 ZM30.540,22.202 L25.286,31.390 L20.032,22.202 L30.540,22.202 ZM37.108,55.128 L26.600,55.128 L31.854,45.939 L37.108,55.128 ZM43.676,45.172 L38.422,54.359 L33.168,45.172 L43.676,45.172 ZM50.243,55.128 L39.738,55.128 L44.990,45.939 L50.243,55.128 Z"
-            />
-          </svg>
-          <span class="logo-txt">GeekJob</span>
-        </a>
-        <div class="header-top-cnt">
-          <input class="mobile-input-btn" id="mobile-btn" type="checkbox" />
-          <label class="mobile-label-btn" for="mobile-btn">
-            <div class="mobile-menu__icon"></div>
-          </label>
-          <ul class="main-header-list">
-            <li class="main-header-list-item">
-              <a href="#" class="list-item-link">Соискателям</a>
-            </li>
-            <li class="main-header-list-item">
-              <a href="#" class="list-item-link">Работодателям</a>
-            </li>
-            <li class="main-header-list-item">
-              <Account />
-            </li>
-          </ul>
-          <div class="header-buttons-cnt">
-            <form class="form-search" action="#" method="post">
-              <label class="form-search-label" for="searchbox">
-                <svg
-                  class="header-search-svg"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  width="24"
-                  height="24"
-                >
-                  <path
-                    d="M23.762,22.681 L17.569,16.586 C19.190,14.825 20.187,12.494 20.187,9.929 C20.186,4.443 15.668,-0.002 10.093,-0.002 C4.519,-0.002 0.001,4.443 0.001,9.929 C0.001,15.416 4.519,19.862 10.093,19.862 C12.502,19.862 14.711,19.028 16.446,17.644 L22.663,23.763 C22.966,24.062 23.458,24.062 23.761,23.763 C24.065,23.464 24.065,22.979 23.762,22.681 ZM10.093,18.334 C5.377,18.334 1.553,14.572 1.553,9.929 C1.553,5.288 5.377,1.525 10.093,1.525 C14.810,1.525 18.633,5.288 18.633,9.929 C18.633,14.572 14.810,18.334 10.093,18.334 Z"
-                  />
-                </svg>
-              </label>
-            </form>
-          </div>
-        </div>
-      </div>
+      <Header />
       <div class="searchinput">
         <form class="searchWrap">
           <input
@@ -187,18 +137,11 @@
           <span class="statistics-block-text">КОМПАНИЙ</span>
         </div>
       </section>
-      <section class="vacancies" v-show="items.length">
-        <h3 class="section-title">Вакансии</h3>
-        <div class="vacancies-block">
-          <Item
-            v-for="(item, index) of items"
-            :key="item.id"
-            :item="item"
-            :idx="index"
-            @del="delItem"
-            @pin="pinItem"
-          />
-        </div>
+      <section class="vacancies" v-show="items.length" ref="refVacancies">
+        <router-link to="/vacancies_list">
+          <h3 class="section-title">Вакансии</h3>
+        </router-link>
+        <ItemsList />
       </section>
       <section class="for-mobile">
         <img
@@ -279,49 +222,28 @@
         </div>
       </section>
     </main>
-    <footer>
-      <section class="footer-lower">
-        <div class="footer-lower-block">
-          <p>
-            Copyright &copy; 2021
-            <a class="footer-lower-allocated" href="#">GeekJob</a>
-          </p>
-          <a href="#">Политика конфеденциальности</a>
-          <a href="#">Вопросы и ответы</a>
-          <a href="#">Поддержка</a>
-        </div>
-      </section>
-    </footer>
+    <Footer />
   </div>
 </template>
 
 <script>
-import Item from "@components/Item.vue";
-import Account from "@components/Account.vue";
+import ItemsList from "@components/ItemsList.vue";
+import Header from "@components/Header.vue";
+import Footer from "@components/Footer.vue";
 import { mapGetters } from "vuex";
 import { instanceAuth as api } from "@api";
 import { hhProvider } from "@providers/hh";
 
 export default {
   name: "Home",
-  components: { Item, Account },
+  components: { ItemsList, Header, Footer },
   data() {
     return {
-      items: [],
-      vacancyText: ""
+      vacancyText: "",
     };
   },
   async mounted() {
-    try {
-      let res = await api.get("/vacancies");
-      const { result, status } = res.data;
-      if (status == "ok") {
-        this.items = result;
-        console.log(this.items);
-      }
-    } catch (err) {
-      console.log(`==> get vacancies failure ` + err);
-    }
+    await this.$store.dispatch("getVacanciesFromBD");
   },
   methods: {
     async findItems(event) {
@@ -330,53 +252,31 @@ export default {
         const newVacancies = await hhProvider.find({
           text: this.vacancyText,
           vacancy_search_order: "publication_time",
-          per_page: "20"
+          per_page: "20",
         });
         if (this.userLogin == "unknown") {
-          this.items = newVacancies;
+          this.$store.dispatch("getVacancies", newVacancies);
         } else {
           await api.delete("/vacancies");
           await api.post("/vacancies", newVacancies);
-          let res = await api.get("/vacancies");
-          this.items = res.data.result;
+          await this.$store.dispatch("getVacanciesFromBD");
         }
+        this.$nextTick(function () {
+          this.$refs.refVacancies.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest",
+          });
+        });
       } catch (err) {
         console.log("==> find vacancies failure " + err);
       }
     },
-    async delItem(id) {
-      try {
-        const result = await api.delete("/vacancy/" + id);
-        const { status } = result.data;
-        if (status == "ok" || this.userLogin == "unknown") {
-          const idx = this.items.findIndex(el => el.origin_id === id);
-          if (idx !== -1) {
-            this.items.splice(idx, 1);
-          }
-        }
-      } catch (err) {
-        console.log("==> delete vacancy failure " + err);
-      }
-    },
-    async pinItem(id, pinned) {
-      try {
-        const result = await api.put("/vacancy/" + id, { pinned });
-        const { status } = result.data;
-        if (status == "ok" || this.userLogin == "unknown") {
-          this.items.forEach(el => {
-            if (el.origin_id === id) {
-              el.pinned = pinned;
-            }
-          });
-        }
-      } catch (err) {
-        console.log("==> change vacancy failure " + err);
-      }
-    }
   },
   computed: {
-    ...mapGetters({ userLogin: "userLogin_getter" })
-  }
+    ...mapGetters({ userLogin: "userLogin_getter" }),
+    ...mapGetters({ items: "vacancies_getter" }),
+  },
 };
 </script>
 

@@ -1,0 +1,16 @@
+.vacancies {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 50px;
+    box-sizing: border-box;
+}
+
+.vacancies-block {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 30px;
+    justify-content: center;
+}

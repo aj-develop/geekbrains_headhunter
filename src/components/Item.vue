@@ -49,12 +49,9 @@ export default {
     salary: function() {
       let str = "-";
       if (this.item.salary) {
-        let arr = this.item.salary
-          .substring(1, this.item.salary.length - 1)
-          .split(",");
-        str = arr[0] ? arr[0] : "";
-        str += arr[0] && arr[1] ? "-" : "";
-        str += arr[1] ? arr[1] : "";
+        str = this.item.salary_from ? this.item.salary_from : "";
+        str += this.item.salary_from && this.item.salary_to ? "-" : "";
+        str += this.item.salary_to ? this.item.salary_to : "";
       }
       return str;
     },

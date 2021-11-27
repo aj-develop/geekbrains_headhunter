@@ -1,5 +1,7 @@
 @import "item-style.css";
 @import "account-style.css";
+@import "profile-style.css";
+@import "vacancies-list-style.css";
 
 @font-face {
     font-family: 'montserrat';
@@ -78,11 +80,22 @@
     font-style: normal;
 }
 
-
 * {
     margin: 0;
     padding: 0;
 }
+
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+}
+
+ #app{
+    height: 100%;
+ }
 
 .container {
     background-color: #ffffff;
@@ -90,7 +103,22 @@
     max-width: 1920px;
     margin: 0 auto;
     min-width: 430px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
+
+header{
+    flex: 0 0 auto;
+ }
+
+ main{
+    flex: 1 0 auto;
+ }
+
+ footer{
+    flex: 0 0 auto;
+ }
 
 .main-header {
     min-height: 724px;
@@ -110,6 +138,7 @@
     min-height: 60px;
     flex-direction: row;
     position: relative;
+    background-color: #555555;
 }
 
 .logo {
@@ -478,23 +507,6 @@
     letter-spacing: -0.4px;
     margin-top: 21px;
     margin-bottom: 30px;
-}
-
-.vacancies {
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 80px;
-    padding-bottom: 50px;
-    box-sizing: border-box;
-}
-
-.vacancies-block {
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: 30px;
-    justify-content: center;
 }
 
 .footer-lower {

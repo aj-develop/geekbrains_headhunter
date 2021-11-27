@@ -53,7 +53,8 @@ module.exports = async (dbConnection) => {
             secret varchar(255) not null,
             login varchar(255) not null UNIQUE,
             password varchar(255) not null,
-            sessionid text DEFAULT null 
+            sessionid text DEFAULT null,
+            role int2 DEFAULT 1
           )`;
         const result = await createTable(dbConnection, sqlTableUsers, DB_CONFIG.tableUsers);
         await fillTable(dbConnection, userArr, DB_CONFIG.tableUsers);
@@ -62,14 +63,17 @@ module.exports = async (dbConnection) => {
                 id serial PRIMARY KEY,
                 provider varchar(32)
                 origin_id varchar(64) not null,
-                name varchar(64) not null,
+                name varchar(128) not null,
                 logo_url varchar(128) DEFAULT null,
                 salary int4range DEFAULT null,
+                salary_from int DEFAULT null,
+                salary_to int DEFAULT null,
                 currency varchar(3) DEFAULT null,
                 published_at timestamptz,
                 area varchar(32),
                 requirement text,
                 responsibility text,
+                url varchar(128) DEFAULT null,
                 user_id int not null,
                 pinned boolean DEFAULT false
               )`;
