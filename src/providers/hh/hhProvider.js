@@ -5,8 +5,13 @@ import { instance as api } from "@api";
 export class HHprovider extends Provider {
     static name = 'hh';
     static _url = 'https://api.hh.ru/';
+    static _header = {'HH-User-Agent': 'api-test-agent'};
 
     find(filter) {
+        api.interceptors.request.use(config => {
+            config.headers.common[Object.keys(HHprovider._header)[0]] = Object.values(HHprovider._header)[0];
+            return config;
+          });
         return api.get(
             HHprovider._url + 'vacancies?' +
             this.convertFilterToQueryStr(filter)
@@ -22,10 +27,7 @@ export class HHprovider extends Provider {
 
     convertFilterToQueryStr(filter) {
         let url = '';
-        for (let key in filter) {
-            url += filter[key] ? `&${key}=${filter[key]}` : '';
-        }
-        url = url.substring(1);
+        url = `text=${filter.text}&` + `per_page=${filter.count}&` + 'vacancy_search_order=publication_time';
         return url;
     }
 
@@ -58,7 +60,7 @@ export class HHprovider extends Provider {
             salary,
             salary_from,
             salary_to,
-            currency,
+            currency === 'RUR' ? 'RUB' : currency,
             item.published_at,
             item.area.name,
             item.snippet.requirement,

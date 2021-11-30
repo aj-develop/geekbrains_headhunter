@@ -1,6 +1,7 @@
 const vacancy = require('./vacancyHandler');
 const user = require('./userHandler');
 const token = require('./tokenHandler');
+const requestToProvider = require('./requestToProvider');
 
 const ACTIONS = {
     get: vacancy.getFromDB,
@@ -15,6 +16,10 @@ const ACTIONS = {
 module.exports = async (dataBase, req, res, action) => {
     if (action == 'login') {
         user.login(dataBase, req, res);
+        return;
+    }
+    if (action == 'provider') {
+        requestToProvider(req, res);
         return;
     }
     try {

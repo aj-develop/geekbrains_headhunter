@@ -232,7 +232,9 @@ import Header from "@components/Header.vue";
 import Footer from "@components/Footer.vue";
 import { mapGetters } from "vuex";
 import { instanceAuth as api } from "@api";
-import { hhProvider } from "@providers/hh";
+import {SearchFilter} from "@domain/SearchFilter.js";
+import {PROVIDERS} from '@providers';
+import {descendingTimeCompare} from '@utils/sortHelper.js'
 
 export default {
   name: "Home",
@@ -249,25 +251,32 @@ export default {
     async findItems(event) {
       event.preventDefault();
       try {
-        const newVacancies = await hhProvider.find({
-          text: this.vacancyText,
-          vacancy_search_order: "publication_time",
-          per_page: "20",
-        });
-        if (this.userLogin == "unknown") {
-          this.$store.dispatch("getVacancies", newVacancies);
-        } else {
-          await api.delete("/vacancies");
-          await api.post("/vacancies", newVacancies);
-          await this.$store.dispatch("getVacanciesFromBD");
+        const searchResult = [];
+        for (let provider in PROVIDERS){
+          const res = PROVIDERS[provider].find(SearchFilter.byText(this.vacancyText));
+          if (res){
+            searchResult.push(res);
+          }
         }
-        this.$nextTick(function () {
-          this.$refs.refVacancies.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-            inline: "nearest",
-          });
-        });
+        Promise.all(searchResult)
+          .then(async (vacancies) => {
+            const newVacancies = [].concat(...vacancies);
+            newVacancies.sort(descendingTimeCompare);
+            if (this.userLogin == "unknown") {
+            this.$store.dispatch("getVacancies", newVacancies);
+            } else {
+              await api.delete("/vacancies");
+              await api.post("/vacancies", newVacancies);
+              await this.$store.dispatch("getVacanciesFromBD");
+            }
+            this.$nextTick(function () {
+              this.$refs.refVacancies.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+                inline: "nearest",
+              });
+            });
+          })
       } catch (err) {
         console.log("==> find vacancies failure " + err);
       }

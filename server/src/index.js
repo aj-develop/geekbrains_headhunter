@@ -1,5 +1,6 @@
 const express = require('express');
-var serveStatic = require('serve-static');
+const serveStatic = require('serve-static');
+const nodeFetch = require('node-fetch');
 // const fs = require('fs');
 const dataBaseCreate = require('./modules/dataBaseHandler');
 const handleRequest = require('./modules/requestHandler');
@@ -38,7 +39,10 @@ app.get('/user', async (req, res) => {
 app.post('/user', async (req, res) => {
     handleRequest(dataBase, req, res, 'login');
 });
-
+app.get('/provider', async (req, res) => {
+    handleRequest(dataBase, req, res, 'provider');
+});
+   
 // let protected = fs.readdirSync(`${__dirname}/../../dist`, 'utf-8');
 
 // app.get("*", (req, res) => {
