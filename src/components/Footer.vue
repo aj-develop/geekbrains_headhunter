@@ -10,6 +10,20 @@
         <a href="#">Вопросы и ответы</a>
         <a href="#">Поддержка</a>
       </div>
+      <div>
+        <a href="#">
+        <font-awesome-icon :icon="['fab', 'instagram']" class="social-icon"/>
+        </a>
+        <a href="#">
+          <font-awesome-icon :icon="['fab', 'facebook']" class="social-icon"/>
+        </a>
+        <a href="#">
+          <font-awesome-icon :icon="['fab', 'vk']" class="social-icon"/>
+        </a>
+        <a href="#">
+          <font-awesome-icon :icon="['fab', 'odnoklassniki']" class="social-icon"/>
+        </a>
+      </div>
     </section>
   </footer>
 </template>

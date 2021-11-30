@@ -149,6 +149,208 @@
           <span class="statistics-block-text">КОМПАНИЙ</span>
         </div>
       </section>
+      <section class="profession-block">
+        <div class="profession-block-name">
+          <h2 class="profession-block-header">Работа по профессиям</h2>
+          <ul class="profession-block-multiple">
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Автомобильный бизнес</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Административный персонал</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Банки, инвестиции, лизинг</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Безопасность</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Бухгалтерия, управленческий учет, финансы предприятия</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Высший менеджмент</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Государственная служба, некоммерческие организации</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Добыча сырья</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Домашний персонал</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Закупки</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Инсталляция и сервис</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Информационные технологии, интернет, телеком</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Искусство, развлечения, масс-медиа</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Консультирование</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Маркетинг, реклама, PR</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Медицина, фармацевтика</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Наука, образование</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Начало карьеры, студенты</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Продажи</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Производство, сельское хозяйство</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Рабочий персонал</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Спортивные клубы, фитнес, салоны красоты</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Страхование</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Строительство, недвижимость</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Транспорт, логистика</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Туризм, гостиницы, рестораны</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Управление персоналом, тренинги</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Юристы</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="profession-block-city">
+          <h2 class="profession-block-header">Работа в других городах</h2>
+          <ul class="profession-block-city-multiple">
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Работа в Москве</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Работа в Санкт-Петербурге</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Работа в Новосибирске</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Работа в Екатеринбурге</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Работа в Казане</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Работа в Нижнем Новгороде</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Работа в Челябинске</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Работа в Омске</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Работа в Самаре</span>
+              </a>
+            </li>
+            <li class="profession-multiple-item">
+              <a href="#">
+                <span>Работа в Уфе</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
       <section class="vacancies" v-show="items.length" ref="refVacancies">
         <router-link to="/vacancies_list">
           <h3 class="section-title">Вакансии</h3>

@@ -447,6 +447,7 @@ header{
     align-items: flex-end;
     padding-top: 50px;
     box-sizing: border-box;
+    margin-top: 30px;
 }
 
 .for-mobile-block-text {
@@ -534,6 +535,82 @@ header{
     margin-bottom: 30px;
 }
 
+.profession-block {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.profession-block-name {
+    border-right: 1px solid #e5e5e5;
+}
+
+.profession-block-header {
+    font-family: 'raleway', 'arial', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    font-style: normal;
+    margin-top: 30px;
+    color: #555555;
+    margin-left: 30px;
+}
+
+.profession-block-header:hover {
+    color: #c7b299;
+    cursor: pointer;
+}
+
+.profession-block-multiple {
+    list-style-type: none;
+    column-count: 3;
+    column-width: 312px;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.profession-multiple-item {
+    font-family: 'montserrat', 'arial', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    color: #8c8c8c;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+}
+
+.profession-multiple-item a, 
+.profession-multiple-item a:active,
+.profession-multiple-item a:visited {
+    text-decoration: none;
+    color: #8c8c8c;
+}
+
+.profession-multiple-item a:hover {
+    color: #c7b299;
+    cursor: pointer;
+}
+
+.profession-block-city-multiple {
+    list-style-type: none;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.profession-city-multiple-item {
+    font-family: 'montserrat', 'arial', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    color: #8c8c8c;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+}
+
+.profession-city-multiple-item:hover {
+    color: #c7b299;
+    cursor: pointer;
+}
+
 .footer-lower {
     min-height: 111px;
     background-color: #191919;
@@ -542,7 +619,7 @@ header{
     align-items: center;
 }
 
-.footer-lower-block p, a {
+.footer-lower-block p, .footer-lower-block a {
     text-decoration: none;
     font-family: 'montserrat', 'arial', sans-serif;
     font-size: 13px;
@@ -588,6 +665,17 @@ header{
 }
 
 .footer-lower-allocated:hover {
+    color: #c7b299;
+}
+
+.social-icon {
+    width: 40px !important;
+    height: 40px !important;
+    color: #959595;
+    margin-left: 10px;
+}
+
+.social-icon:hover {
     color: #c7b299;
 }
 
