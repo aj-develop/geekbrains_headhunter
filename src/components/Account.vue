@@ -10,9 +10,9 @@
       <div class="dropAccount-message" v-show="message">
         {{ message }}
       </div>
-      <label class="dropAccount-label" for="login">login</label>
+      <label class="dropAccount-label" for="login">Введите логин</label>
       <input name="login" type="text" v-model="login" />
-      <label class="dropAccount-label" for="password">password</label>
+      <label class="dropAccount-label" for="password">Введите пароль</label>
       <input name="password" type="text" v-model="password" />
       <div class="dropAccount-buttons">
         <button
@@ -20,14 +20,14 @@
           name="login"
           @click.prevent="loginRequest($event)"
         >
-          Sign in
+          Войти
         </button>
         <button
           class="account-button dropAccount-button"
           name="register"
           @click.prevent="loginRequest($event)"
         >
-          Register
+          Регистрация
         </button>
       </div>
     </form>
@@ -56,7 +56,7 @@ export default {
         this.message = response.message;
       }
     } catch (err) {
-      this.message = "Error occurred while logging in";
+      this.message = "Произошла ошибка при входе в систему";
       console.log(err);
     }
   },
@@ -79,10 +79,10 @@ export default {
             this.message = result.message;
           }
         } else {
-          this.message = "Please enter login and password";
+          this.message = "Пожалуйста, введите логин и пароль";
         }
       } catch (err) {
-        this.message = "Error occurred while logging in";
+        this.message = "Произошла ошибка при входе в систему";
         console.log(err);
       }
     }
