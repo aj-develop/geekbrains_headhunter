@@ -57,7 +57,7 @@ export default {
     },
     currency: function() {
       let str = "";
-      str += this.item.currency ? ` ${this.item.currency}` : "";
+      str += (this.item.currency && (this.item.salary_from || this.item.salary_to)) ? ` ${this.item.currency}` : "";
       return str;
     }
   }
