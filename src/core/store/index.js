@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { encrypt, decrypt } from '@utils/crypto.js';
 import { instanceAuth as api } from '@api';
 
 Vue.use(Vuex);
@@ -28,9 +29,15 @@ export default new Vuex.Store({
         async getUser({ commit }) {
             try {
                 const response = await api.get('/user');
-                const { result } = response.data;
-                result ? commit('setUserLogin', result.login) :
+                let { result } = response.data;
+                if (result) {
+                    result = decrypt(result);
+                    response.data.result = result;
+                    commit('setUserLogin', result.login);
+                }
+                else {
                     commit('setUserLogin', 'unknown');
+                }
                 return response.data;
             }
             catch (err) {
@@ -40,11 +47,15 @@ export default new Vuex.Store({
         },
         async login({ commit }, data) {
             try {
-                const response = await api.post('/user', data);
-                const { token } = response.data;
+                const response = await api.post('/user', { user: encrypt(`${data.login}:${data.password}:${data.action}`) });
+                let { token, user } = response.data;
                 if (token) {
                     commit('setToken', token);
                     window.localStorage.setItem('tokenAuth', token);
+                }
+                if (user) {
+                    user = decrypt(user);
+                    response.data.user = user;
                 }
                 return response.data;
             }

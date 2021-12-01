@@ -2,6 +2,7 @@ const vacancy = require('./vacancyHandler');
 const user = require('./userHandler');
 const token = require('./tokenHandler');
 const requestToProvider = require('./requestToProvider');
+const crypto = require('../utils/crypto');
 
 const ACTIONS = {
     get: vacancy.getFromDB,
@@ -31,7 +32,9 @@ module.exports = async (dataBase, req, res, action) => {
                 const payload = action === 'getUser' ? { login: curUser.login } : { user_id: curUser.id };
                 const result = await ACTIONS[action](dataBase, payload, req);
                 if (result) {
-                    res.status(200).json({ status: 'ok', result });
+                    action === 'getUser'
+                    ? res.status(200).json({ status: 'ok', result: crypto.encrypt(JSON.stringify(result))})  
+                    : res.status(200).json({ status: 'ok', result });
                     console.log(`==> successfully ${action}`);
                 } else {
                     res.json({ status: 'fail', message: 'Server error' });

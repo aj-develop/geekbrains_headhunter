@@ -446,9 +446,9 @@ import Header from "@components/Header.vue";
 import Footer from "@components/Footer.vue";
 import { mapGetters } from "vuex";
 import { instanceAuth as api } from "@api";
-import {SearchFilter} from "@domain/SearchFilter.js";
-import {PROVIDERS} from '@providers';
-import {descendingTimeCompare} from '@utils/sortHelper.js'
+import { SearchFilter } from "@domain/SearchFilter.js";
+import { PROVIDERS } from '@providers';
+import { descendingTimeCompare } from '@utils/sortHelper.js'
 
 export default {
   name: "Home",
@@ -499,7 +499,7 @@ export default {
   computed: {
     ...mapGetters({ userLogin: "userLogin_getter" }),
     ...mapGetters({ items: "vacancies_getter" }),
-  },
+  }
 };
 </script>
 

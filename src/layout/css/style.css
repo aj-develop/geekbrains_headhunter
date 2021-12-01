@@ -97,6 +97,10 @@ body{
     height: 100%;
  }
 
+ a{
+     text-decoration: none;
+ }
+
 .container {
     background-color: #ffffff;
     width: 100%;
