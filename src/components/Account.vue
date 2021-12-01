@@ -3,7 +3,8 @@
     <button class="account-button" @click="showAccount = !showAccount">
       Войти
     </button>
-    <form class="dropAccount" v-show="showAccount" ref="formLogin">
+    <form ref="formLogin"></form>
+    <div class="dropAccount" v-show="showAccount">
       <div class="dropAccount-name" v-show="user">
         Welcome, You signed as:<span> {{ user }}</span>
       </div>
@@ -30,7 +31,7 @@
           Регистрация
         </button>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 

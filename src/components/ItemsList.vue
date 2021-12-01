@@ -19,9 +19,7 @@ export default {
   name: "ItemsList",
   components: { Item },
   data() {
-    return {
-      key: 0,
-    };
+    return {};
   },
   async mounted() {},
   methods: {
@@ -43,7 +41,7 @@ export default {
   computed: {
     ...mapGetters({ userLogin: "userLogin_getter" }),
     ...mapGetters({ items: "vacancies_getter" }),
-  },
+  }
 };
 </script>
 

@@ -2,6 +2,7 @@ const format = require('pg-format');
 const dataBaseQuery = require('../db/modules/query');
 const token = require('./tokenHandler');
 const DB_CONFIG = require('../db/dataBaseConfig');
+const crypto = require('../utils/crypto');
 
 async function getFromDB(dataBase, payload) {
     try {
@@ -35,7 +36,8 @@ async function addToDB(dataBase, newUser) {
 }
 
 async function login(dataBase, req, res) {
-    const { login, password, action } = req.body;
+    let userStr = crypto.decrypt(req.body.user);
+    const [login, password, action] = userStr.split(':');
     try {
         let curUser = await getFromDB(dataBase, { login });
         if (curUser && action === 'register') {
@@ -61,7 +63,7 @@ async function login(dataBase, req, res) {
         }
         const curToken = await token.addToDB(dataBase, curUser);
         if (curToken) {
-            res.status(200).json({ token: curToken.token, user: curUser });
+            res.status(200).json({ token: curToken.token, user: crypto.encrypt(JSON.stringify(curUser)) });
             return true;
         }
     }
