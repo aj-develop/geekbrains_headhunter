@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     border: solid 1px #eed6b9;
-    padding: 7px;
+    padding: 10px;
     border-radius: 4px;
     margin: 20px;
 }
@@ -19,6 +19,8 @@
 
 .vacancy-block-logo{
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     margin-right: 20px;
     border-radius: 4px;
@@ -66,11 +68,10 @@
   }
 
   .vacancy-block-text{
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 10px;
-    padding-bottom: 5px;
 }
 
 .vacancy-name {
@@ -111,4 +112,88 @@
     opacity: 1;
     cursor: pointer;
     transform: scale(1.1);
+}
+
+.vacancy-large {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border: solid 1px #eed6b9;
+    padding: 15px;
+    border-radius: 4px;
+    margin: 10px 30px 30px 40px;
+    box-shadow: 2px 2px 10px 1px rgba(34, 60, 80, 0.16);
+}
+
+.vacancy-large:hover{
+    box-shadow: none;
+}
+
+.vacancy-provider{
+    font-family: 'raleway', 'arial', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: #eed6b9;
+}
+
+.vacancy-name-large {
+    font-family: 'raleway', 'arial', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    margin-bottom: 20px;
+    color: #555555;
+}
+
+.vacancy-requirement{
+    font-family: 'raleway', 'arial', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: #555555;
+}
+
+.vacancy-responsibility{
+    font-family: 'raleway', 'arial', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: #555555;
+}
+
+.vacancy-title{
+    font-family: 'raleway', 'arial', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #eed6b9;
+}
+
+.vacancy-icon-text{
+    color: #eed6b9;
+}
+
+.vacancy-area-time{
+    font-family: 'montserrat', 'arial', sans-serif;
+    font-size: 12px;
+    color: #eed6b9;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.vacancy-area{
+    margin-right: 30px;
+    font-weight: 600;
+}
+
+.vacancy-bottom{
+    display: flex;
+    justify-content: space-between;
+}
+
+.vacancy-url{
+    font-family: 'montserrat', 'arial', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #eed6b9;
 }
