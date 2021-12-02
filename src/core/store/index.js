@@ -9,11 +9,15 @@ export default new Vuex.Store({
     state: {
         token: null,
         userLogin: 'unknown',
+        user: null,
         vacancies: []
     },
     mutations: {
         setToken(state, token) {
             state.token = token;
+        },
+        setUser(state, user) {
+            state.user = user;
         },
         setUserLogin(state, login) {
             state.userLogin = login;
@@ -51,6 +55,7 @@ export default new Vuex.Store({
                 let { token, user } = response.data;
                 if (token) {
                     commit('setToken', token);
+                    commit('setUser', user);
                     window.localStorage.setItem('tokenAuth', token);
                 }
                 if (user) {
@@ -121,6 +126,7 @@ export default new Vuex.Store({
     },
     getters: {
         userLogin_getter: state => state.userLogin,
+        user: state => state.user,
         vacancies_getter: state => state.vacancies
     }
 })

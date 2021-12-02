@@ -4,38 +4,9 @@
       <Header />
     </header>
     <main>
-      <div class="profile">
-      <div class="left">
-          <h3 class="title">Мои события</h3>
-          <ul class="my__events">
-            <li class="my__events-item" >
-              <a href="#" class="my__events-link"><svg
-                class="my__events-svg"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                width="20"
-                height="20"
-                viewBox="0 0 30 30"
-            >
-              <path
-                  d="M16,29A13,13,0,1,1,29,16,13,13,0,0,1,16,29ZM16,5A11,11,0,1,0,27,16,11,11,0,0,0,16,5Z"
-              />
-              <path
-                  d="M16,17a5,5,0,1,1,5-5A5,5,0,0,1,16,17Zm0-8a3,3,0,1,0,3,3A3,3,0,0,0,16,9Z"
-              />
-              <path
-                  d="M25.55,24a1,1,0,0,1-.74-.32A11.35,11.35,0,0,0,16.46,20h-.92a11.27,11.27,0,0,0-7.85,3.16,1,1,0,0,1-1.38-1.44A13.24,13.24,0,0,1,15.54,18h.92a13.39,13.39,0,0,1,9.82,4.32A1,1,0,0,1,25.55,24Z"
-              />
-            </svg>Отклики и приглашения
-            </a>
-            </li>
-            <li class="my__events-item">Просмотры резюме</li>
-            <li class="my__events-item">Избранные вакансии</li>
-            <li class="my__events-item">Автопоиски</li>
-          </ul>
-        </div>
-      </div>
-
+      <h2 class="profile__title">Найди вакансию своей мечты</h2>
+      <Search/>
+      <ItemsList />
     </main>
     <Footer />
   </div>
@@ -44,12 +15,21 @@
 <script>
 import Header from "@components/Header.vue";
 import Footer from "@components/Footer.vue";
+import Search from "../components/Search";
+import ItemsList from "../components/ItemsList";
 
 export default {
   name: "Profile",
-  components: { Header, Footer }
+  components: {Search, Header, Footer,ItemsList }
 };
 </script>
 
 <style >
+.profile__title{
+  text-align: center;
+  padding: 10px;
+}
+.searchWrap{
+  border: 1px solid #ccc;
+}
 </style>
