@@ -14,7 +14,7 @@
       <label class="dropAccount-label" for="login">Введите логин</label>
       <input name="login" type="text" v-model="login" />
       <label class="dropAccount-label" for="password">Введите пароль</label>
-      <input name="password" type="passowrd" v-model="password" />
+      <input name="password" type="password" v-model="password" />
       <div class="dropAccount-buttons">
         <button
           class="account-button dropAccount-button"
