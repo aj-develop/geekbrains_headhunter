@@ -58,7 +58,7 @@
             <router-link to="/profile" > Рассылки</router-link>
             <router-link to="/profile" > Мои приложения</router-link>
             <hr>
-            <router-link to="/profile" >Выход</router-link>
+            <a @click="logout">Выход</a>
           </div>
                       </label>
       </div>
@@ -81,6 +81,10 @@ export default {
   methods: {
     toggleClick() {
       this.isOpen = !this.isOpen;
+    },
+    logout() {
+      window.localStorage.removeItem('tokenAuth');
+      this.$store.commit('setUserLogin', 'unknown');
     }
   },
   computed:{
@@ -92,6 +96,7 @@ export default {
 <style scoped>
 .dropdown{
   position: relative;
+  font-family: 'montserrat', 'arial', sans-serif;
 }
 .dropdown__menu{
   position: absolute;

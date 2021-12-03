@@ -1,6 +1,6 @@
 <template>
   <div class="vacancies-block">
-    <Item
+    <Item :type="type"
       v-for="(item, index) of items"
       :key="item.id"
       :item="item"
@@ -18,6 +18,11 @@ import { mapGetters } from "vuex";
 export default {
   name: "ItemsList",
   components: { Item },
+  props: {
+    type: {
+      type: String , default: "small"
+    }
+  },
   data() {
     return {};
   },

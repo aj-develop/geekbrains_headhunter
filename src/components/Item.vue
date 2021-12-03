@@ -1,47 +1,111 @@
 <template>
-  <div class="vacancy" :class="{ pinned: item.pinned }">
-    <div class="vacancy-block-logo">
-      <img
-        class="vacancy-logo"
-        :src="`${item.logo_url ? item.logo_url : ''}`"
-        alt=""
-      />
-    </div>
-    <div class="vacancy-block-text">
-      <div class="vacancy-name">{{ item.name }}</div>
-      <div class="vacancy-salary">
-        {{ salary }} <span>{{ currency }}</span>
+  <div v-frag>
+    <template v-if="type == 'small'">
+      <div class="vacancy" :class="{ pinned: item.pinned }">
+        <div class="vacancy-block-logo">
+          <img
+            class="vacancy-logo"
+            :src="`${item.logo_url ? item.logo_url : ''}`"
+            alt=""
+          />
+        </div>
+        <div class="vacancy-block-text">
+          <div class="vacancy-name">{{ item.name }}</div>
+          <div class="vacancy-salary">
+            {{ salary }} <span>{{ currency }}</span>
+          </div>
+        </div>
+        <div class="vacancy-block-icon">
+          <font-awesome-icon
+            :icon="delIcon"
+            class="vacancy-icon"
+            @click.prevent="$emit('del', item.origin_id)"
+          />
+          <font-awesome-icon
+            :icon="pinIcon"
+            class="vacancy-icon"
+            @click.prevent="$emit('pin', item.origin_id, !item.pinned)"
+          />
+        </div>
       </div>
-    </div>
-    <div class="vacancy-block-icon">
-      <font-awesome-icon
-        :icon="delIcon"
-        class="vacancy-icon"
-        @click.prevent="$emit('del', item.origin_id)"
-      />
-      <font-awesome-icon
-        :icon="pinIcon"
-        class="vacancy-icon"
-        @click.prevent="$emit('pin', item.origin_id, !item.pinned)"
-      />
-    </div>
+    </template>
+
+    <template v-if="type == 'large'">
+      <div class="vacancy-large" :class="{ pinned: item.pinned }">
+        <div class="vacancy-block-logo">
+          <img
+            class="vacancy-logo"
+            :src="`${item.logo_url ? item.logo_url : ''}`"
+            alt=""
+          />
+          <div class="vacancy-provider">
+            {{item.provider}}
+          </div>
+        </div>
+        <div class="vacancy-block-text">
+          <div class="vacancy-name-large">{{ item.name }}</div>
+          <div class="vacancy-area-time">
+            <div class="vacancy-area" v-if="item.area">
+              {{item.area}}
+            </div>
+            <div class="vacancy-time" v-if="item.published_at">
+              {{item.published_at.substring(0,10)}}
+            </div>
+          </div>
+          <div class="vacancy-requirement" v-if="item.requirement">
+            <span><font-awesome-icon :icon="angleIcon" class="vacancy-icon-text"/> </span>
+            {{item.requirement}}
+          </div>
+          <div class="vacancy-responsibility" v-if="item.responsibility">
+            <span><font-awesome-icon :icon="angleIcon" class="vacancy-icon-text"/> </span>
+            {{item.responsibility}}
+          </div>
+          <div class="vacancy-bottom">
+            <div class="vacancy-salary">
+              {{ salary }} <span>{{ currency }}</span>
+            </div>
+            <a :href="item.url" class="vacancy-url">подробнее >></a>
+          </div>
+        </div>
+        <div class="vacancy-block-icon">
+          <font-awesome-icon
+            :icon="delIcon"
+            class="vacancy-icon"
+            @click.prevent="$emit('del', item.origin_id)"
+          />
+          <font-awesome-icon
+            :icon="pinIcon"
+            class="vacancy-icon"
+            @click.prevent="$emit('pin', item.origin_id, !item.pinned)"
+          />
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faThumbtack, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faThumbtack, faTimesCircle, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import frag from "vue-frag";
 
 export default {
+  directives: {
+    frag,
+  },
   name: "Item",
   data() {
     return {
       pinIcon: faThumbtack,
-      delIcon: faTimesCircle
+      delIcon: faTimesCircle,
+      angleIcon: faAngleRight,
     };
   },
   components: { FontAwesomeIcon },
   props: {
+    type: {
+      type: String , default: "small"
+    },
     item: { type: Object, default: () => ({}) },
     idx: { type: Number }
   },

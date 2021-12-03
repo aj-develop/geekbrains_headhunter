@@ -2,18 +2,7 @@
   <div class="container">
     <header class="main-header">
       <Header />
-      <div class="searchinput">
-        <form class="searchWrap">
-          <input
-            placeholder="Профессия, должность"
-            type="text"
-            v-model="vacancyText"
-          />
-          <button class="button-search" @click="findItems($event)">
-            Найти работу
-          </button>
-        </form>
-      </div>
+      <Search @scrollToVacancies="scrollToVacancies"/>
       <div class="tagline">
         <h4 class="tagline-txt">Тысячи возможностей</h4>
         <h4 class="tagline-txt">Выбери свою</h4>
@@ -449,10 +438,11 @@ import { instanceAuth as api } from "@api";
 import { SearchFilter } from "@domain/SearchFilter.js";
 import { PROVIDERS } from '@providers';
 import { descendingTimeCompare } from '@utils/sortHelper.js'
+import Search from "../components/Search";
 
 export default {
   name: "Home",
-  components: { ItemsList, Header, Footer },
+  components: {Search, ItemsList, Header, Footer },
   data() {
     return {
       vacancyText: "",
@@ -495,6 +485,15 @@ export default {
         console.log("==> find vacancies failure " + err);
       }
     },
+    scrollToVacancies() {
+      this.$nextTick(function () {
+        this.$refs.refVacancies.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
+        });
+      });
+    }
   },
   computed: {
     ...mapGetters({ userLogin: "userLogin_getter" }),

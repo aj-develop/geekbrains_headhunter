@@ -3,10 +3,14 @@
     <header>
       <Header />
     </header>
-    <main>
+    <main class="vacancies-list">
+      <div class="vacancies-sort">
+        <div class="vacancies-list-title">
+          Вакансии
+        </div>
+      </div>
       <div class="vacancies">
-        <h3 class="section-title">Вакансии</h3>
-        <ItemsList />
+        <ItemsList :type="'large'"/>
       </div>
     </main>
     <Footer />
