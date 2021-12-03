@@ -7,6 +7,7 @@
           <a class="footer-lower-allocated" href="#">GeekJob</a>
         </p>
         <a href="#">Политика конфеденциальности</a>
+        <router-link to="/about">О компании</router-link>
         <a href="#">Вопросы и ответы</a>
         <a href="#">Поддержка</a>
       </div>
