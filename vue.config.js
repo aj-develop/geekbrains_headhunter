@@ -7,6 +7,7 @@ module.exports = {
         open: false,
         proxy: 'http://localhost:5005'
     },
+
     chainWebpack: config => {
         config.resolve.alias.set('@core', path.join(__dirname, 'src', 'core'));
         config.resolve.alias.set('@api', path.join(__dirname, 'src', 'core', 'api'));
@@ -18,5 +19,6 @@ module.exports = {
         config.resolve.alias.set('@components', path.join(__dirname, 'src', 'components'));
         config.resolve.alias.set('@utils', path.join(__dirname, 'src', 'utils'));
     },
+
     productionSourceMap: false
 }
