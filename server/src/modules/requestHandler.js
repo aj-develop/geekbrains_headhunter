@@ -11,7 +11,8 @@ const ACTIONS = {
     del: vacancy.delFromDB,
     delAll: vacancy.delAllFromDB,
     update: vacancy.updateDB,
-    getUser: user.getFromDB
+    getUser: user.getFromDB,
+    updateUser: user.updateDB
 }
 
 module.exports = async (dataBase, req, res, action) => {

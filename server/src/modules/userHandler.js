@@ -35,6 +35,20 @@ async function addToDB(dataBase, newUser) {
     }
 }
 
+async function updateDB(dataBase, payload, req) {
+    try {
+        const newParam = JSON.parse(crypto.decrypt(req.body.user));
+        const sql = `UPDATE %I SET %I = %L WHERE %I = %L`;
+        const result = await dataBaseQuery(dataBase, format(sql,
+            `${DB_CONFIG.tableUsers}`, Object.keys(newParam), Object.values(newParam), 'id', req.params.id));
+        return (result);
+    }
+    catch (err) {
+        console.log('==> failed update user ' + err);
+        return null;
+    }
+}
+
 async function login(dataBase, req, res) {
     let userStr = crypto.decrypt(req.body.user);
     const [login, password, action] = userStr.split(':');
@@ -73,4 +87,4 @@ async function login(dataBase, req, res) {
     }
 }
 
-module.exports = { getFromDB, addToDB, login };
+module.exports = { getFromDB, addToDB, updateDB, login };

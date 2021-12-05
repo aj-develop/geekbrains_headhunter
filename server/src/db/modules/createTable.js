@@ -54,6 +54,14 @@ module.exports = async (dbConnection) => {
             login varchar(255) not null UNIQUE,
             password varchar(255) not null,
             sessionid text DEFAULT null,
+            first_name varchar(32) DEFAULT null,
+            last_name varchar(32) DEFAULT null,
+            birthday timestamp DEFAULT null,
+            gender varchar(8) DEFAULT null,
+            city varchar(32) DEFAULT null,
+            address varchar(255) DEFAULT null,
+            phone varchar(32) DEFAULT null,
+            email varchar(64) DEFAULT null,
             role int2 DEFAULT 1
           )`;
         const result = await createTable(dbConnection, sqlTableUsers, DB_CONFIG.tableUsers);

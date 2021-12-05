@@ -68,7 +68,7 @@
 
 <script>
 import Account from "@components/Account.vue";
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Header",
@@ -78,13 +78,17 @@ export default {
       isOpen: false,
     };
   },
+  mounted() {},
   methods: {
     toggleClick() {
       this.isOpen = !this.isOpen;
     },
     logout() {
+      this.$router.push('/');
+      location.reload();
       window.localStorage.removeItem('tokenAuth');
       this.$store.commit('setUserLogin', 'unknown');
+      this.$store.commit('setUser', null);
     }
   },
   computed:{
