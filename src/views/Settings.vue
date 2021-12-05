@@ -3,69 +3,23 @@
     <header>
       <Header />
     </header>
-    <main>
+    <main class="settings">
       <h2 class="setting__title">Настройки</h2>
       <div class="settings__content">
-        <div @click="showBlock.login = !showBlock.login" class="myCardHeaderBlock">
+        <div @click="settings.password.show = !settings.password.show" class="myCardHeaderBlock">
           <div class="settings__login">
             <div class="settings__login-title mySectionTitle">
-              Изменение Логина
+              Изменить: <span>{{ settings.password.rus }}</span>
             </div>
             <div class="settings__login-arrow">
               <svg-arrow-up
-                  :style="{transform:!showBlock.login ? 'rotateX(180deg)' :'rotateX(0deg)' }"
+                  :style="{ transform:!settings.password.show ? 'rotateX(180deg)' :'rotateX(0deg)' }"
                   class="commission"
               />
             </div>
           </div>
         </div>
-        <transition v-if="showBlock.login" name="show-side">
-          <div >
-            <div >
-              <div class="settings__activeLogin">
-                Текущий логин: <b>{{ userLogin }}</b>
-              </div>
-              <div>
-                <div class="settings__login_edit">
-                  <input
-                      v-model="settings.login"
-                      placeholder="Введите новый логин"
-                      name="login"
-                      type="text"
-                      id="login"
-                      required
-                  >
-                </div>
-              </div>
-            </div>
-            <div >
-              <div class="button__wrapper" >
-                <button
-                    type="button"
-                    @click="changeLogin"
-                >
-                  Сохранить логин
-                </button>
-              </div>
-            </div>
-          </div>
-        </transition>
-      </div>
-      <div class="settings__content">
-        <div @click="showBlock.password = !showBlock.password" class="myCardHeaderBlock">
-          <div class="settings__login">
-            <div class="settings__login-title mySectionTitle">
-              Изменение Пароля
-            </div>
-            <div class="settings__login-arrow">
-              <svg-arrow-up
-                  :style="{transform:!showBlock.login ? 'rotateX(180deg)' :'rotateX(0deg)' }"
-                  class="commission"
-              />
-            </div>
-          </div>
-        </div>
-        <transition v-if="showBlock.password" name="show-side">
+        <transition v-if="settings.password.show" name="show-side">
           <div class="settings__password">
             <div >
               <div class="settings__password-item">
@@ -82,7 +36,7 @@
               <div class="settings__password-item">
                 <label for="newPassword">Новый пароль</label>
                 <input
-                    v-model="settings.password"
+                    v-model="settings.password.value"
                     :type=passwordNewFiledType
                     id="newPassword"
                     name="new_password"
@@ -107,59 +61,17 @@
                   type="button"
                   @click="changePassword"
               >
-                Сохранить пароль
+                Сохранить
               </button>
             </div>
           </div>
         </transition>
       </div>
-      <div class="settings__content">
-        <div @click="showBlock.email = !showBlock.email" class="myCardHeaderBlock">
-          <div class="settings__login">
-            <div class="settings__login-title mySectionTitle">
-              Изменение Email
-            </div>
-            <div class="settings__login-arrow">
-              <svg-arrow-up
-                  :style="{transform:!showBlock.email ? 'rotateX(180deg)' :'rotateX(0deg)' }"
-                  class="commission"
-              />
-            </div>
-          </div>
-        </div>
-        <transition v-if="showBlock.email" name="show-side">
-          <div >
-            <div >
-              <div class="settings__activeLogin">
-                Текущий email: <b>asb@mail.ru</b>
-              </div>
-              <div>
-                <div class="settings__login_edit">
-                  <input
-                      v-model="settings.email"
-                      placeholder="Введите новый email"
-                      name="login"
-                      type="text"
-                      id="email"
-                      required
-                  >
-                </div>
-              </div>
-            </div>
-            <div >
-              <div class="button__wrapper" >
-                <button
-                    type="button"
-                    @click="changeEmail"
-                >
-                  Сохранить email
-                </button>
-              </div>
-            </div>
-          </div>
-        </transition>
-      </div>
-
+      <SettingItem
+        v-for="(item) of settingsAll"
+        :key="item.name"
+        :item="item"
+      />
     </main>
     <Footer />
   </div>
@@ -168,43 +80,43 @@
 <script>
 import Header from "@components/Header.vue";
 import Footer from "@components/Footer.vue";
+import SettingItem from "@components/SettingItem.vue";
 import SvgArrowUp from '../svg/SvgArrowUp';
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 export default {
   name: "Settings",
-  components: { Header, Footer,SvgArrowUp },
+  components: { Header, Footer, SvgArrowUp, SettingItem },
   data: () => ({
-    showBlock: {
-      login: false,
-      password: false,
-      email: false
-    },
     settings: {
-      login: '',
-      old_password: '',
-      password: '',
-      password_confirmation: '',
-      email: ''
+      old_password: '' ,
+      password_confirmation: '' ,
+      password: { value: '', show: false, rus: 'пароль'}
     },
+    settingsAll: [
+      { name: 'login', value: '', show: false, rus: 'логин', type: 'text' },
+      { name: 'first_name', value: '', show: false, rus: 'имя', type: 'text' },
+      { name: 'last_name', value: '', show: false, rus: 'фамилия', type: 'text' },
+      { name: 'gender', value: '', show: false, rus: 'пол', type: 'radio' },
+      { name: 'birthday', value: '', show: false, rus: 'дата рождения', type: 'date' },
+      { name: 'city', value: '', show: false, rus: 'город', type: 'text' },
+      { name: 'address', value: '', show: false, rus: 'адрес', type: 'text' },
+      { name: 'email', value: '', show: false, rus: 'электронная почта', type: 'email' },
+      { name: 'phone', value: '', show: false, rus: 'телефон', type: 'tel' },
+    ],
     passwordFiledType: 'password',
     passwordNewFiledType: 'password',
     passwordConfirmFiledType: 'password',
     passwordShow: false,
     passwordShowNew: false,
-    passwordShowConfirm: false,
+    passwordShowConfirm: false
   }),
   computed: {
     ...mapGetters({ userLogin: "userLogin_getter" }),
+    ...mapGetters({ user: "user_getter" })
   },
   methods:{
-    changeEmail() {
-      console.log('меняем email')
-    },
-    changeLogin() {
-      console.log('меняем login')
-    },
-    changePassword() {
-      console.log('меняем password')
+    async changePassword() {
+      await this.$store.dispatch("updateUser", { id: this.user.id, newParam: { password: this.settings.password.value }});
     },
     showPassword() {
       if(this.passwordFiledType === 'password') {
@@ -240,17 +152,25 @@ export default {
 </script>
 
 <style scoped>
+  .settings{
+    font-family: 'raleway', 'arial', sans-serif;
+  }
   .setting__title{
     text-align: center;
     padding: 20px;
+    color: #555555;
   }
-  .mySectionTitle{
+  .settings__login-title{
     font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
+    font-weight: 400;
+    font-size: 18px;
     line-height: 24px;
-    color: #142533;
+    color: #555555;
     padding: 10px;
+  }
+  .settings__login-title span{
+    font-weight: 600;
+    color: #142533;
   }
   .myCardHeaderBlock{
     background-color: #f1f1f1 !important;
@@ -290,6 +210,7 @@ export default {
     color: #fff;
     outline: none;
     border: none;
+    margin: 10px 0;
   }
   button:hover{
     cursor: pointer;

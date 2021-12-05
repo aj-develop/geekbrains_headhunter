@@ -35,9 +35,10 @@ export default new Vuex.Store({
                 const response = await api.get('/user');
                 let { result } = response.data;
                 if (result) {
-                    result = decrypt(result);
+                    result = JSON.parse(decrypt(result));
                     response.data.result = result;
                     commit('setUserLogin', result.login);
+                    commit('setUser', result);
                 }
                 else {
                     commit('setUserLogin', 'unknown');
@@ -49,17 +50,30 @@ export default new Vuex.Store({
                 return null;
             }
         },
+        async updateUser({ commit }, payload) {
+            try {
+                const { id, newParam } = payload;
+                const res = await api.put("/user/" + id, { user: encrypt(JSON.stringify(newParam)) });
+                const { status } = res.data;
+                if (status == "ok") {
+                    const newUser = { ...this.state.user, [Object.keys(newParam)[0]] : Object.values(newParam)[0] }
+                    commit('setUser', newUser);
+                }
+            } catch (err) {
+                console.log("==> change user failure " + err);
+            }
+        },
         async login({ commit }, data) {
             try {
                 const response = await api.post('/user', { user: encrypt(`${data.login}:${data.password}:${data.action}`) });
                 let { token, user } = response.data;
                 if (token) {
-                    commit('setToken', token);
-                    commit('setUser', user);
+                    commit('setToken', token);   
                     window.localStorage.setItem('tokenAuth', token);
                 }
                 if (user) {
-                    user = decrypt(user);
+                    user = JSON.parse(decrypt(user));
+                    commit('setUser', user);
                     response.data.user = user;
                 }
                 return response.data;
@@ -126,7 +140,7 @@ export default new Vuex.Store({
     },
     getters: {
         userLogin_getter: state => state.userLogin,
-        user: state => state.user,
+        user_getter: state => state.user,
         vacancies_getter: state => state.vacancies
     }
 })
