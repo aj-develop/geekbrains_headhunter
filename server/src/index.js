@@ -1,7 +1,8 @@
 const express = require('express');
 const serveStatic = require('serve-static');
 const nodeFetch = require('node-fetch');
-// const fs = require('fs');
+const history = require('connect-history-api-fallback');
+var path = require('path');
 const dataBaseCreate = require('./modules/dataBaseHandler');
 const handleRequest = require('./modules/requestHandler');
 
@@ -11,6 +12,7 @@ const port = process.env.PORT || 5005;
 app.use(express.static(`${__dirname}/../../dist`));
 app.use(serveStatic(__dirname + "/../../dist"));
 app.use(express.json());
+app.use(history());
 
 let dataBase;
 dataBaseCreate().then((res) => (dataBase = res));
@@ -39,19 +41,15 @@ app.get('/user', async (req, res) => {
 app.post('/user', async (req, res) => {
     handleRequest(dataBase, req, res, 'login');
 });
+app.put('/user/:id', async (req, res) => {
+    handleRequest(dataBase, req, res, 'updateUser');
+});
 app.get('/provider', async (req, res) => {
     handleRequest(dataBase, req, res, 'provider');
 });
-   
-// let protected = fs.readdirSync(`${__dirname}/../../dist`, 'utf-8');
 
-// app.get("*", (req, res) => {
-// let path = req.params['0'].substring(1)
-// if (protected.includes(path)) {
-//     res.sendFile(`${__dirname}/../../dist/${path}`);
-// } else {
-// res.sendFile(`${__dirname}/../../dist/index.html`);
-// }
-// });
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname + '/../../dist/index.html'));
+});
 
 app.listen(port, () => { console.log(`listen at port ${port}...`); });

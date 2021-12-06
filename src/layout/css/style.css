@@ -137,7 +137,7 @@ header{
 .header-top-row {
     display: flex;
     flex-wrap: nowrap;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-around;
     min-height: 60px;
     flex-direction: row;
@@ -186,6 +186,7 @@ header{
     list-style-type: none;
     justify-content: flex-start;
     box-sizing: content-box;
+    align-items: center;
 }
 
 .main-header-list li {
@@ -203,7 +204,7 @@ header{
     font-weight: 400;
     font-style: normal;
     color: #ffffff;
-    margin: 13px;
+    margin: 0 13px;
     padding: 7px;
 }
 
@@ -224,7 +225,7 @@ header{
 }
 
 .header-buttons-cnt {
-    margin-top: 20px;
+    margin-top: 10px;
     padding-left: 53px;
 }
 
@@ -683,6 +684,168 @@ header{
 
 .social-icon:hover {
     color: #c7b299;
+}
+
+.about-company-page-cnt {
+    display: flex;
+    justify-content: center;
+}
+
+.about-company-page {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.about-company-page-section {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.about-company-page-info {
+    max-width: 620px;
+    padding-top: 30px;
+    order: 1;
+}
+
+.about-company-page-h2 {
+    font-family: 'raleway', 'arial', sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    font-style: normal;
+    margin-bottom: 10px;
+    color: #555555;
+}
+
+.about-company-page-text {
+    font-family: 'montserrat', 'arial', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    color: #8c8c8c;
+    letter-spacing: -0.3px;
+    padding: 5px 0 0 0;
+}
+
+.about-company-page-stats {
+    padding-top: 42px;
+}
+
+.about-company-page-h3 {
+    font-family: 'raleway', 'arial', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    font-style: normal;
+    color: #555555;
+}
+
+.about-company-page-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.about-company-page-list-item {
+    width: 50%;
+    padding-top: 26px;
+}
+
+.about-company-item-title {
+    font-family: 'montserrat', 'arial', sans-serif;
+    font-size: 54px;
+    font-weight: 600;
+    font-style: normal;
+    color: #555555;
+}
+
+.about-company-item-measure {
+    font-family: 'montserrat', 'arial', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    font-style: normal;
+    color: #555555;
+}
+
+.about-company-item-subtitle {
+    font-family: 'montserrat', 'arial', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    color: #8c8c8c;
+    letter-spacing: -0.8px;
+}
+
+.about-company-presskit {
+    max-width: 320px;
+    order: 2;
+}
+
+.about-company-presskit-wrapper {
+    border: 1px dashed #999;
+    padding: 30px 45px 30px 20px;
+    margin-bottom: 14px;
+}
+
+.about-company-presskit-list {
+    padding-top: 16px;
+    list-style: none;
+}
+
+.about-company-presskit-list .about-company-page-text {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.about-company-presskit-list .about-company-page-text + .about-company-page-text {
+    margin-top: 11px;
+}
+
+.about-company-presskit-list .about-company-page-text + .about-company-page-link {
+    margin-top: 11px;
+}
+
+.about-company-presskit-item .about-company-page-link {
+    display: block;
+}
+
+.about-company-logo-svg {
+    fill: currentColor;
+    color: white;
+    background-color: #555;
+    margin-top: 11px;
+}
+
+.about-company-presskit .about-company-page-text {
+    width: 100%;
+}
+
+.about-company-contacts {
+    margin-top: 40px;
+}
+
+.about-company-contacts-list {
+    line-height: 24px;
+    list-style: none;
+}
+
+.about-company-contacts-item {
+    margin-top: 17px;
+}
+
+.about-company-contacts-list .about-company-page-text {
+    display: inline-block;
+    vertical-align: top;
+    line-height: inherit;
+    width: 100%;
+}
+
+.about-company-page-phone {
+    font-family: 'montserrat', 'arial', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    color: #555;
+    letter-spacing: -0.8px;
 }
 
 .mobile-label-btn,
