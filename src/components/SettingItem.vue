@@ -17,7 +17,7 @@
       <div >
         <div >
           <div class="settings__activeLogin">
-            текущее значение: <span>{{ user[item.name] }}</span>
+            текущее значение: <span>{{ item.name === 'birthday' ? user[item.name].substring(0, 10) : user[item.name] }}</span>
           </div>
           <div>
             <div class="settings__login_edit" v-if="item.type != 'radio'">

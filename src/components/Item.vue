@@ -39,26 +39,29 @@
             alt=""
           />
           <div class="vacancy-provider">
-            {{item.provider}}
+            {{ item.provider }}
           </div>
         </div>
         <div class="vacancy-block-text">
           <div class="vacancy-name-large">{{ item.name }}</div>
+          <div class="vacancy-employer-name" v-if="item.employer_name">
+            {{ item.employer_name }}
+          </div>
           <div class="vacancy-area-time">
             <div class="vacancy-area" v-if="item.area">
-              {{item.area}}
+              {{ item.area }}
             </div>
             <div class="vacancy-time" v-if="item.published_at">
-              {{item.published_at.substring(0,10)}}
+              {{ item.published_at.substring(0,10) }}
             </div>
           </div>
           <div class="vacancy-requirement" v-if="item.requirement">
             <span><font-awesome-icon :icon="angleIcon" class="vacancy-icon-text"/> </span>
-            {{item.requirement}}
+            {{ item.requirement.substring(0,255) }}
           </div>
           <div class="vacancy-responsibility" v-if="item.responsibility">
             <span><font-awesome-icon :icon="angleIcon" class="vacancy-icon-text"/> </span>
-            {{item.responsibility}}
+            {{ item.responsibility }}
           </div>
           <div class="vacancy-bottom">
             <div class="vacancy-salary">
@@ -86,7 +89,7 @@
 
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faThumbtack, faTimesCircle, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faThumbtack, faTimesCircle, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import frag from "vue-frag";
 
 export default {
@@ -98,7 +101,7 @@ export default {
     return {
       pinIcon: faThumbtack,
       delIcon: faTimesCircle,
-      angleIcon: faAngleRight,
+      angleIcon: faCaretRight,
     };
   },
   components: { FontAwesomeIcon },
