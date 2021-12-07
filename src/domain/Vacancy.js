@@ -1,6 +1,6 @@
 export class Vacancy {
     constructor(provider, origin_id, name, logo_url, salary, salary_from, salary_to, currency,
-        published_at, area, requirement, responsibility, url, pinned) {
+        published_at, area, requirement, responsibility, url, employer_name, pinned) {
         this.provider = provider;
         this.origin_id = origin_id;
         this.name = name;
@@ -14,6 +14,7 @@ export class Vacancy {
         this.requirement = requirement;
         this.responsibility = responsibility;
         this.url = url;
+        this.employer_name = employer_name;
         this.pinned = pinned;
     }
 

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { encrypt, decrypt } from '@utils/crypto.js';
 import { instanceAuth as api } from '@api';
+import { SORTER } from '@utils/sortHelper';
 
 Vue.use(Vuex);
 
@@ -136,6 +137,9 @@ export default new Vuex.Store({
             } catch (err) {
                 console.log("==> change vacancy failure " + err);
             }
+        },
+        sortVacancies({ commit }, sorter) {
+            commit('setVacancies', this.state.vacancies.sort(SORTER[sorter]));
         }
     },
     getters: {

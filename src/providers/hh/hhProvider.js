@@ -63,9 +63,10 @@ export class HHprovider extends Provider {
             currency === 'RUR' ? 'RUB' : currency,
             item.published_at,
             item.area.name,
-            item.snippet.requirement,
-            item.snippet.responsibility,
+            item.snippet.requirement ? item.snippet.requirement.replace(/[<highlighttext>|</highlighttext>]/g, '') : null,
+            item.snippet.responsibility ? item.snippet.responsibility.replace(/[<highlighttext>|</highlighttext>]/g, '') : null,
             item.alternate_url,
+            item.employer.name,
             0
         )
     }
