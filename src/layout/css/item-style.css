@@ -145,6 +145,14 @@
     color: #555555;
 }
 
+.vacancy-name a {
+    color: #555555;
+}
+
+.vacancy-name-large a {
+    color: #555555;
+}
+
 .vacancy-requirement{
     font-family: 'raleway', 'arial', sans-serif;
     font-size: 14px;
