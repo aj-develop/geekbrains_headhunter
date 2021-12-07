@@ -10,7 +10,11 @@
           />
         </div>
         <div class="vacancy-block-text">
-          <div class="vacancy-name">{{ item.name }}</div>
+          <div class="vacancy-name">
+            <router-link :to="{ name: 'Vacancy', params: { id: item.origin_id }}">
+              {{ item.name }}
+            </router-link>
+          </div>
           <div class="vacancy-salary">
             {{ salary }} <span>{{ currency }}</span>
           </div>
@@ -43,7 +47,11 @@
           </div>
         </div>
         <div class="vacancy-block-text">
-          <div class="vacancy-name-large">{{ item.name }}</div>
+          <div class="vacancy-name-large">
+            <router-link :to="{ name: 'Vacancy', params: { id: item.origin_id }}">
+              {{ item.name }}
+            </router-link>
+          </div>
           <div class="vacancy-employer-name" v-if="item.employer_name">
             {{ item.employer_name }}
           </div>
