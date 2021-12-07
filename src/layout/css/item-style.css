@@ -197,3 +197,12 @@
     font-weight: 600;
     color: #eed6b9;
 }
+
+.vacancy-employer-name {
+    font-family: 'raleway', 'arial', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    margin-bottom: 20px;
+    color: #8c8c8c;
+}

@@ -82,6 +82,7 @@ module.exports = async (dbConnection) => {
                 requirement text,
                 responsibility text,
                 url varchar(128) DEFAULT null,
+                employer_name varchar(128) DEFAULT null,
                 user_id int not null,
                 pinned boolean DEFAULT false
               )`;

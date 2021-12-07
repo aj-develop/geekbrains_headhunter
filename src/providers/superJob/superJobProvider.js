@@ -51,11 +51,12 @@ export class SuperJobProvider extends Provider {
             item.payment_from,
             item.payment_to,
             item.currency ? item.currency.toUpperCase() : null,
-            new Date(item.date_published).toISOString(),
+            new Date(item.date_published * 1000).toISOString(),
             item.town.title,
             item.candidat,
             item.work,
             item.link,
+            item.firm_name,
             0
         )
     }

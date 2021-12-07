@@ -8,6 +8,7 @@
     font-weight: 600;
     color: #555555;
     margin-top: 60px;
+    margin-bottom: 50px;
 }
 
 .vacancies-sort{
@@ -16,6 +17,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.vacancies-sort-item {
+    font-family: 'raleway', 'arial', sans-serif;
+    color: white;
+    margin-bottom: 50px;
 }
 
 .vacancies {
@@ -32,4 +39,20 @@
     flex-wrap: wrap;
     padding-top: 30px;
     justify-content: center;
+}
+
+.sort-item-title {
+    margin-bottom: 10px;
+}
+
+.sort-item-title span{
+    color: #555555;
+}
+
+.vacancies-sort-item select{
+    font-family: 'raleway', 'arial', sans-serif;
+    background-color: #8c8c8c;
+    outline: none;
+    border-radius: 5px;
+    border: 0;
 }
