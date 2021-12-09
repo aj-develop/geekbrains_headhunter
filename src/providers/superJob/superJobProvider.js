@@ -57,6 +57,11 @@ export class SuperJobProvider extends Provider {
             item.work,
             item.link,
             item.firm_name,
+            item.vacancyRichText,
+            item.type_of_work.title,
+            item.experience.title,
+            item.experience.title == 'Без опыта' ? true : false,
+            item.place_of_work.title == 'Удалённая работа (на дому)' ? true : false,
             0
         )
     }

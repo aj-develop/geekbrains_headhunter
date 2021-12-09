@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import VuexPersistence from 'vuex-persist';
 import { encrypt, decrypt } from '@utils/crypto.js';
 import { instanceAuth as api } from '@api';
 import { SORTER } from '@utils/sortHelper';
@@ -145,6 +146,8 @@ export default new Vuex.Store({
     getters: {
         userLogin_getter: state => state.userLogin,
         user_getter: state => state.user,
-        vacancies_getter: state => state.vacancies
-    }
+        vacancies_getter: state => state.vacancies,
+        vacancyById_getter: state => (id) => { return state.vacancies.find(vacancy => vacancy.origin_id == id) }
+    },
+    plugins: [new VuexPersistence().plugin]
 })

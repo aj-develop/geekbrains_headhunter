@@ -11,7 +11,7 @@ const port = process.env.PORT || 5005;
 
 app.use(express.static(`${__dirname}/../../dist`));
 app.use(serveStatic(__dirname + "/../../dist"));
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
 app.use(history());
 
 let dataBase;
