@@ -143,6 +143,16 @@
     font-style: normal;
     margin-bottom: 20px;
     color: #555555;
+    display: flex;
+    justify-content: space-between;
+}
+
+.vacancy-name a {
+    color: #555555;
+}
+
+.vacancy-name-large a {
+    color: #555555;
 }
 
 .vacancy-requirement{
@@ -205,4 +215,23 @@
     font-style: normal;
     margin-bottom: 20px;
     color: #8c8c8c;
+}
+
+.vacancy-label {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+}
+
+.vacancy-label-item {
+    margin: 0 10px;
+    width: 70px;
+    padding: 5px;
+    background-color: #85cde0;
+    border-radius: 15px;
+}
+
+.noexperience{
+    background-color: #e0bc85;
 }

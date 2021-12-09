@@ -21,7 +21,22 @@ export class HHprovider extends Provider {
                 if (response.status != 200) {
                     throw new Error(response.statusText)
                 }
-                return this.convertVacanciesListResponse(response.data.items);
+                let getVacanciesList = async () => { return await this.convertVacanciesListResponse(response.data.items); };
+                return getVacanciesList().then((result) => { return result });
+            })
+    }
+
+    getVacancyById(id){
+        api.interceptors.request.use(config => {
+            config.headers.common[Object.keys(HHprovider._header)[0]] = Object.values(HHprovider._header)[0];
+            return config;
+        });
+        return api.get(HHprovider._url + 'vacancies/' + id)
+            .then((response) => {
+                if (response.status != 200) {
+                    throw new Error(response.statusText)
+                }
+                return response.data;             
             })
     }
 
@@ -32,12 +47,20 @@ export class HHprovider extends Provider {
     }
 
     convertVacanciesListResponse(items) {
-        return items.map((item) => {
-            return this.convertVacancyResponse(item)
+        const vacanciesArr = items.map((item) => {
+            let getConvertedVacancy = async () => { return await this.convertVacancyResponse(item) };
+            return getConvertedVacancy().then((result) => { return result });
         })
+        return Promise.all(vacanciesArr)
+          .then(async (vacancies) => {
+            const newVacancies = [].concat(...vacancies);
+            return newVacancies;
+          })
     }
 
     convertVacancyResponse(item) {
+        const getVacancy = async () => { return await this.getVacancyById(item.id)};
+        return getVacancy().then((vacancyData) => {
         let salary = '';
         let salary_from = null;
         let salary_to = null;
@@ -67,7 +90,13 @@ export class HHprovider extends Provider {
             item.snippet.responsibility ? item.snippet.responsibility.replace(/[<highlighttext>|</highlighttext>]/g, '') : null,
             item.alternate_url,
             item.employer.name,
+            vacancyData.description,
+            item.schedule.name,
+            vacancyData.experience.name,
+            vacancyData.experience == 'Нет опыта' ? true : false,
+            item.schedule.name == 'Удаленная работа' ? true : false,
             0
         )
     }
+    )}
 }

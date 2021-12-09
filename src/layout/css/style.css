@@ -2,6 +2,7 @@
 @import "account-style.css";
 @import "profile-style.css";
 @import "vacancies-list-style.css";
+@import "vacancy-page.css";
 
 @font-face {
     font-family: 'montserrat';
