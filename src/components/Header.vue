@@ -28,39 +28,42 @@
           <a href="#" class="list-item-link">Работодателям</a>
         </li>
         <li class="main-header-list-item">
-          <Account v-if="userLogin === 'unknown'"/>
+          <Account v-if="userLogin === 'unknown'" />
         </li>
       </ul>
       <div class="header-buttons-cnt" v-if="userLogin !== 'unknown'">
-        <label class="form-search-label dropdown" for="searchbox" @click="toggleClick">
-                      <svg
-                          class="header-search-svg"
-                          xmlns="http://www.w3.org/2000/svg"
-                          xmlns:xlink="http://www.w3.org/1999/xlink"
-                          width="32"
-                          height="32"
-                          viewBox="0 0 40 40"
-                        >
-                          <path
-                            d="M16,29A13,13,0,1,1,29,16,13,13,0,0,1,16,29ZM16,5A11,11,0,1,0,27,16,11,11,0,0,0,16,5Z"
-                          />
-                          <path
-                            d="M16,17a5,5,0,1,1,5-5A5,5,0,0,1,16,17Zm0-8a3,3,0,1,0,3,3A3,3,0,0,0,16,9Z"
-                          />
-                          <path
-                            d="M25.55,24a1,1,0,0,1-.74-.32A11.35,11.35,0,0,0,16.46,20h-.92a11.27,11.27,0,0,0-7.85,3.16,1,1,0,0,1-1.38-1.44A13.24,13.24,0,0,1,15.54,18h.92a13.39,13.39,0,0,1,9.82,4.32A1,1,0,0,1,25.55,24Z"
-                          />
-                        </svg>
+        <label
+          class="form-search-label dropdown"
+          for="searchbox"
+          @click="toggleClick"
+        >
+          <svg
+            class="header-search-svg"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="32"
+            height="32"
+            viewBox="0 0 40 40"
+          >
+            <path
+              d="M16,29A13,13,0,1,1,29,16,13,13,0,0,1,16,29ZM16,5A11,11,0,1,0,27,16,11,11,0,0,0,16,5Z"
+            />
+            <path
+              d="M16,17a5,5,0,1,1,5-5A5,5,0,0,1,16,17Zm0-8a3,3,0,1,0,3,3A3,3,0,0,0,16,9Z"
+            />
+            <path
+              d="M25.55,24a1,1,0,0,1-.74-.32A11.35,11.35,0,0,0,16.46,20h-.92a11.27,11.27,0,0,0-7.85,3.16,1,1,0,0,1-1.38-1.44A13.24,13.24,0,0,1,15.54,18h.92a13.39,13.39,0,0,1,9.82,4.32A1,1,0,0,1,25.55,24Z"
+            />
+          </svg>
 
           <div class="dropdown__menu" v-show="isOpen">
-            <router-link to="/profile" > Профиль</router-link>
-            <router-link to="/settings" > Настройки</router-link>
-            <router-link to="/profile" > Рассылки</router-link>
-            <router-link to="/profile" > Мои приложения</router-link>
-            <hr>
+            <router-link to="/profile"> Профиль</router-link>
+            <router-link to="/settings"> Настройки</router-link>
+            <router-link to="/profile"> Избранное</router-link>
+            <hr />
             <a @click="logout">Выход</a>
           </div>
-                      </label>
+        </label>
       </div>
     </div>
   </div>
@@ -84,25 +87,25 @@ export default {
       this.isOpen = !this.isOpen;
     },
     logout() {
-      this.$router.push('/');
+      this.$router.push("/");
       location.reload();
-      window.localStorage.removeItem('tokenAuth');
-      this.$store.commit('setUserLogin', 'unknown');
-      this.$store.commit('setUser', null);
-    }
+      window.localStorage.removeItem("tokenAuth");
+      this.$store.commit("setUserLogin", "unknown");
+      this.$store.commit("setUser", null);
+    },
   },
-  computed:{
+  computed: {
     ...mapGetters({ userLogin: "userLogin_getter" }),
-  }
+  },
 };
 </script>
 
 <style scoped>
-.dropdown{
+.dropdown {
   position: relative;
-  font-family: 'montserrat', 'arial', sans-serif;
+  font-family: "montserrat", "arial", sans-serif;
 }
-.dropdown__menu{
+.dropdown__menu {
   position: absolute;
   z-index: 100;
   background: #555;
@@ -119,7 +122,7 @@ export default {
   color: #fff;
 }
 .dropdown__menu a:hover {
- cursor: pointer;
+  cursor: pointer;
   color: #0088ad;
 }
 .dropdown hr {
