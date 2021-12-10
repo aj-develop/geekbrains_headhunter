@@ -2,7 +2,9 @@
   <div class="container">
     <header class="main-header">
       <Header />
-      <Search @scrollToVacancies="scrollToVacancies"/>
+      <Search @scrollToVacancies="scrollToVacancies"
+        :selectedCity="selectedCity"
+        :selectedProfession="selectedProfession"/>
       <div class="tagline">
         <h4 class="tagline-txt">Тысячи возможностей</h4>
         <h4 class="tagline-txt">Выбери свою</h4>
@@ -142,202 +144,24 @@
         <div class="profession-block-name">
           <h2 class="profession-block-header">Работа по профессиям</h2>
           <ul class="profession-block-multiple">
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Автомобильный бизнес</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Административный персонал</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Банки, инвестиции, лизинг</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Безопасность</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Бухгалтерия, управленческий учет, финансы предприятия</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Высший менеджмент</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Государственная служба, некоммерческие организации</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Добыча сырья</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Домашний персонал</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Закупки</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Инсталляция и сервис</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Информационные технологии, интернет, телеком</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Искусство, развлечения, масс-медиа</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Консультирование</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Маркетинг, реклама, PR</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Медицина, фармацевтика</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Наука, образование</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Начало карьеры, студенты</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Продажи</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Производство, сельское хозяйство</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Рабочий персонал</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Спортивные клубы, фитнес, салоны красоты</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Страхование</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Строительство, недвижимость</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Транспорт, логистика</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Туризм, гостиницы, рестораны</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Управление персоналом, тренинги</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Юристы</span>
+            <li  v-for="prof in professionArr" :key="prof.name" class="profession-multiple-item">
+              <a @click="selectProfession(prof.name)">
+                <span :class="{ selected: prof.selected }">{{ prof.name }}</span>
               </a>
             </li>
           </ul>
+          <button class="profession-block-city-button" @click="resetProfession">сбросить</button>
         </div>
         <div class="profession-block-city">
           <h2 class="profession-block-header">Работа в других городах</h2>
           <ul class="profession-block-city-multiple">
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Работа в Москве</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Работа в Санкт-Петербурге</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Работа в Новосибирске</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Работа в Екатеринбурге</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Работа в Казане</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Работа в Нижнем Новгороде</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Работа в Челябинске</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Работа в Омске</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Работа в Самаре</span>
-              </a>
-            </li>
-            <li class="profession-multiple-item">
-              <a href="#">
-                <span>Работа в Уфе</span>
+            <li  v-for="city in cityArr" :key="city.name" class="profession-multiple-item">
+              <a @click="selectCity(city.name)">
+                <span :class="{ selected: city.selected }">Работа в {{ city.text }}</span>
               </a>
             </li>
           </ul>
+          <button class="profession-block-city-button" @click="resetCity">сбросить</button>
         </div>
       </section>
       <section class="vacancies" v-show="items.length" ref="refVacancies">
@@ -434,57 +258,63 @@ import ItemsList from "@components/ItemsList.vue";
 import Header from "@components/Header.vue";
 import Footer from "@components/Footer.vue";
 import { mapGetters } from "vuex";
-import { instanceAuth as api } from "@api";
-import { SearchFilter } from "@domain/SearchFilter.js";
-import { PROVIDERS } from '@providers';
-import { descendingTimeCompare } from '@utils/sortHelper.js'
 import Search from "../components/Search";
 
 export default {
   name: "Home",
-  components: {Search, ItemsList, Header, Footer },
+  components: { Search, ItemsList, Header, Footer },
   data() {
     return {
-      vacancyText: "",
+      cityArr: [
+        {name: 'Москва', text: 'Москве', selected: false},
+        {name: 'Санкт-Петербург', text: 'Санкт-Петербурге', selected: false},
+        {name: 'Новосибирск', text: 'Новосибирске', selected: false},
+        {name: 'Ектеринбург', text: 'Екатеринбурге', selected: false},
+        {name: 'Казань', text: 'Казани', selected: false},
+        {name: 'Красноярск', text: 'Красноярске', selected: false},
+        {name: 'Челябинск', text: 'Челябинске', selected: false},
+        {name: 'Омск', text: 'Омске', selected: false},
+        {name: 'Самара', text: 'Самаре', selected: false},
+        {name: 'Уфа', text: 'Уфе', selected: false},
+      ],
+      professionArr: [
+        {name: 'Автомобильный бизнес', selected: false},
+        {name: 'Административный персонал', selected: false},
+        {name: 'Банки, инвестиции, лизинг', selected: false},
+        {name: 'Безопасность', selected: false},
+        {name: 'Бухгалтерия, управленческий учет, финансы предприятия', selected: false},
+        {name: 'Высший менеджмент', selected: false},
+        {name: 'Государственная служба, некоммерческие организации', selected: false},
+        {name: 'Добыча сырья', selected: false},
+        {name: 'Домашний персонал', selected: false},
+        {name: 'Закупки', selected: false},
+        {name: 'Инсталляция и сервис', selected: false},
+        {name: 'Информационные технологии, интернет, телеком', selected: false},
+        {name: 'Искусство, развлечения, масс-медиа', selected: false},
+        {name: 'Консультирование', selected: false},
+        {name: 'Маркетинг, реклама, PR', selected: false},
+        {name: 'Медицина, фармацевтика', selected: false},
+        {name: 'Наука, образование', selected: false},
+        {name: 'Начало карьеры, студенты', selected: false},
+        {name: 'Продажи', selected: false},
+        {name: 'Производство, сельское хозяйство', selected: false},
+        {name: 'Рабочий персонал', selected: false},
+        {name: 'Спортивные клубы, фитнес, салоны красоты', selected: false},
+        {name: 'Страхование', selected: false},
+        {name: 'Строительство, недвижимость', selected: false},
+        {name: 'Транспорт, логистика', selected: false},
+        {name: 'Туризм, гостиницы, рестораны', selected: false},
+        {name: 'Управление персоналом, тренинги', selected: false},
+        {name: 'Юристы', selected: false},
+      ],
+      selectedCity: "",
+      selectedProfession: ""
     };
   },
   async mounted() {
     await this.$store.dispatch("getVacanciesFromBD");
   },
   methods: {
-    async findItems(event) {
-      event.preventDefault();
-      try {
-        const searchResult = [];
-        for (let provider in PROVIDERS){
-          const res = PROVIDERS[provider].find(SearchFilter.byText(this.vacancyText));
-          if (res){
-            searchResult.push(res);
-          }
-        }
-        Promise.all(searchResult)
-          .then(async (vacancies) => {
-            const newVacancies = [].concat(...vacancies);
-            newVacancies.sort(descendingTimeCompare);
-            if (this.userLogin == "unknown") {
-            this.$store.dispatch("getVacancies", newVacancies);
-            } else {
-              await api.delete("/vacancies");
-              await api.post("/vacancies", newVacancies);
-              await this.$store.dispatch("getVacanciesFromBD");
-            }
-            this.$nextTick(function () {
-              this.$refs.refVacancies.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-                inline: "nearest",
-              });
-            });
-          })
-      } catch (err) {
-        console.log("==> find vacancies failure " + err);
-      }
-    },
     scrollToVacancies() {
       this.$nextTick(function () {
         this.$refs.refVacancies.scrollIntoView({
@@ -493,7 +323,23 @@ export default {
           inline: "nearest",
         });
       });
-    }
+    },
+    selectCity(newCity){
+      this.selectedCity = newCity;
+      this.cityArr.forEach((city) => { city.selected = city.name === newCity ? true : false });
+    },
+    selectProfession(newProfession){
+      this.selectedProfession = newProfession;
+      this.professionArr.forEach((prof) => { prof.selected = prof.name === newProfession ? true : false });
+    },
+    resetCity(){
+      this.selectedCity = '';
+      this.cityArr.forEach((city) => { city.selected = false });
+    },
+    resetProfession(){
+      this.selectedProfession = '';
+      this.professionArr.forEach((prof) => { prof.selected = false });
+    },
   },
   computed: {
     ...mapGetters({ userLogin: "userLogin_getter" }),

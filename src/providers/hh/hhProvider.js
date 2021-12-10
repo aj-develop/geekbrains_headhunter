@@ -1,6 +1,7 @@
 import { Provider } from '@domain/Provider.js';
 import { Vacancy } from '@domain/Vacancy.js';
 import { instance as api } from "@api";
+import { CITY } from './ catalog';
 
 export class HHprovider extends Provider {
     static name = 'hh';
@@ -43,6 +44,9 @@ export class HHprovider extends Provider {
     convertFilterToQueryStr(filter) {
         let url = '';
         url = `text=${filter.text}&` + `per_page=${filter.count}&` + 'vacancy_search_order=publication_time';
+        if (filter.city) {
+            url += `&area=${CITY[filter.city]}`;
+        }
         return url;
     }
 

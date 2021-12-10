@@ -26,13 +26,26 @@ export default {
       vacancyText: "",
     };
   },
+  props: {
+    selectedCity: {
+      type: String,
+      default: ""
+    },
+    selectedProfession: {
+      type: String,
+      default: ""
+    }
+  },
   methods: {
     async findItems(event) {
       event.preventDefault();
       try {
         const searchResult = [];
+        const filter = SearchFilter.byText(this.vacancyText);
+        filter.city = this.selectedCity;
+        filter.specialization = this.selectedProfession;
         for (let provider in PROVIDERS){
-          const res = PROVIDERS[provider].find(SearchFilter.byText(this.vacancyText));
+          const res = PROVIDERS[provider].find(filter);
           if (res){
             searchResult.push(res);
           }
