@@ -3,7 +3,6 @@ import Vuex from 'vuex';
 import VuexPersistence from 'vuex-persist';
 import { encrypt, decrypt } from '@utils/crypto.js';
 import { instanceAuth as api } from '@api';
-import { SORTER } from '@utils/sortHelper';
 
 Vue.use(Vuex);
 
@@ -58,7 +57,7 @@ export default new Vuex.Store({
                 const res = await api.put("/user/" + id, { user: encrypt(JSON.stringify(newParam)) });
                 const { status } = res.data;
                 if (status == "ok") {
-                    const newUser = { ...this.state.user, [Object.keys(newParam)[0]] : Object.values(newParam)[0] }
+                    const newUser = { ...this.state.user, [Object.keys(newParam)[0]]: Object.values(newParam)[0] }
                     commit('setUser', newUser);
                 }
             } catch (err) {
@@ -70,7 +69,7 @@ export default new Vuex.Store({
                 const response = await api.post('/user', { user: encrypt(`${data.login}:${data.password}:${data.action}`) });
                 let { token, user } = response.data;
                 if (token) {
-                    commit('setToken', token);   
+                    commit('setToken', token);
                     window.localStorage.setItem('tokenAuth', token);
                 }
                 if (user) {
@@ -138,9 +137,6 @@ export default new Vuex.Store({
             } catch (err) {
                 console.log("==> change vacancy failure " + err);
             }
-        },
-        sortVacancies({ commit }, sorter) {
-            commit('setVacancies', this.state.vacancies.sort(SORTER[sorter]));
         }
     },
     getters: {

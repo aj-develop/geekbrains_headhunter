@@ -1,7 +1,8 @@
 <template>
   <div class="vacancies-block">
-    <Item :type="type"
-      v-for="(item, index) of items"
+    <Item
+      :type="type"
+      v-for="(item, index) of itemsList"
       :key="item.id"
       :item="item"
       :idx="index"
@@ -20,8 +21,13 @@ export default {
   components: { Item },
   props: {
     type: {
-      type: String , default: "small"
-    }
+      type: String,
+      default: "small",
+    },
+    sortedItems: {
+      type: Array,
+      default: null,
+    },
   },
   data() {
     return {};
@@ -44,9 +50,11 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({ userLogin: "userLogin_getter" }),
     ...mapGetters({ items: "vacancies_getter" }),
-  }
+    itemsList: function () {
+      return this.sortedItems ? this.sortedItems : this.items;
+    },
+  },
 };
 </script>
 

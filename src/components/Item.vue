@@ -8,12 +8,20 @@
             :src="`${item.logo_url ? item.logo_url : ''}`"
             alt=""
           />
+          <div class="vacancy-provider">
+            {{ item.provider }}
+          </div>
         </div>
         <div class="vacancy-block-text">
           <div class="vacancy-name">
-            <router-link :to="{ name: 'Vacancy', params: { id: item.origin_id }}">
+            <router-link
+              :to="{ name: 'Vacancy', params: { id: item.origin_id } }"
+            >
               {{ item.name }}
             </router-link>
+          </div>
+          <div class="vacancy-area" v-if="item.area">
+            {{ item.area }}
           </div>
           <div class="vacancy-salary">
             {{ salary }} <span>{{ currency }}</span>
@@ -48,31 +56,42 @@
         </div>
         <div class="vacancy-block-text">
           <div class="vacancy-name-large">
-            <router-link :to="{ name: 'Vacancy', params: { id: item.origin_id }}">
+            <router-link
+              :to="{ name: 'Vacancy', params: { id: item.origin_id } }"
+            >
               {{ item.name }}
             </router-link>
             <div class="vacancy-label">
               <div class="vacancy-label-item" v-if="item.remote">удаленно</div>
-              <div class="vacancy-label-item noexperience" v-if="item.no_experience">без опыта</div>
+              <div
+                class="vacancy-label-item noexperience"
+                v-if="item.no_experience"
+              >
+                без опыта
+              </div>
             </div>
           </div>
           <div class="vacancy-employer-name" v-if="item.employer_name">
             {{ item.employer_name }}
           </div>
           <div class="vacancy-area-time">
-            <div class="vacancy-area" v-if="item.area">
+            <div class="vacancy-area-large" v-if="item.area">
               {{ item.area }}
             </div>
             <div class="vacancy-time" v-if="item.published_at">
-              {{ item.published_at.substring(0,10) }}
+              {{ item.published_at.substring(0, 10) }}
             </div>
           </div>
           <div class="vacancy-requirement" v-if="item.requirement">
-            <span><font-awesome-icon :icon="angleIcon" class="vacancy-icon-text"/> </span>
-            {{ item.requirement.substring(0,255) }}
+            <span
+              ><font-awesome-icon :icon="angleIcon" class="vacancy-icon-text" />
+            </span>
+            {{ item.requirement.substring(0, 255) }}
           </div>
           <div class="vacancy-responsibility" v-if="item.responsibility">
-            <span><font-awesome-icon :icon="angleIcon" class="vacancy-icon-text"/> </span>
+            <span
+              ><font-awesome-icon :icon="angleIcon" class="vacancy-icon-text" />
+            </span>
             {{ item.responsibility }}
           </div>
           <div class="vacancy-bottom">
@@ -101,7 +120,11 @@
 
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faThumbtack, faTimesCircle, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faThumbtack,
+  faTimesCircle,
+  faCaretRight,
+} from "@fortawesome/free-solid-svg-icons";
 import frag from "vue-frag";
 
 export default {
@@ -119,13 +142,14 @@ export default {
   components: { FontAwesomeIcon },
   props: {
     type: {
-      type: String , default: "small"
+      type: String,
+      default: "small",
     },
     item: { type: Object, default: () => ({}) },
-    idx: { type: Number }
+    idx: { type: Number },
   },
   computed: {
-    salary: function() {
+    salary: function () {
       let str = "-";
       if (this.item.salary) {
         str = this.item.salary_from ? this.item.salary_from : "";
@@ -134,12 +158,15 @@ export default {
       }
       return str;
     },
-    currency: function() {
+    currency: function () {
       let str = "";
-      str += (this.item.currency && (this.item.salary_from || this.item.salary_to)) ? ` ${this.item.currency}` : "";
+      str +=
+        this.item.currency && (this.item.salary_from || this.item.salary_to)
+          ? ` ${this.item.currency}`
+          : "";
       return str;
-    }
-  }
+    },
+  },
 };
 </script>
 

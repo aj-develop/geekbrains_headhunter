@@ -191,9 +191,15 @@
     display: flex;
 }
 
-.vacancy-area{
+.vacancy-area-large{
     margin-right: 30px;
     font-weight: 600;
+}
+
+.vacancy-area{
+    font-family: 'montserrat', 'arial', sans-serif;
+    font-size: 10px;
+    color: #eed6b9;
 }
 
 .vacancy-bottom{
