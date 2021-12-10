@@ -1,6 +1,7 @@
 import { Provider } from '@domain/Provider.js';
 import { Vacancy } from '@domain/Vacancy.js';
 import { instance as api } from "@api";
+import { CITY } from './ catalog';
 
 export class SuperJobProvider extends Provider {
     static name = 'superJob';
@@ -25,6 +26,9 @@ export class SuperJobProvider extends Provider {
     convertFilterToQueryStr(filter) {
         let url = '';
         url = `keyword=${filter.text}&` + `count=${filter.count}`;
+        if (filter.city) {
+            url += `&town=${CITY[filter.city]}`;
+        }
         return url;
     }
 

@@ -586,6 +586,10 @@ header{
     letter-spacing: -0.3px;
 }
 
+.profession-multiple-item .selected{
+    font-weight: 600;
+}
+
 .profession-multiple-item a, 
 .profession-multiple-item a:active,
 .profession-multiple-item a:visited {
@@ -617,6 +621,15 @@ header{
 .profession-city-multiple-item:hover {
     color: #c7b299;
     cursor: pointer;
+}
+
+.profession-block-city-button {
+    background: none;
+    border: none;
+    outline: none;
+    margin: 30px 30px;
+    color: #c7b299;
+    text-decoration: underline;
 }
 
 .footer-lower {
