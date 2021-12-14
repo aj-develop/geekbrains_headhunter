@@ -875,6 +875,49 @@ header{
     letter-spacing: -0.8px;
 }
 
+.notfound-cnt {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+
+.notfound-smile {
+    font-family: 'montserrat', 'arial', sans-serif;
+    font-style: normal;
+    font-size: 70px;
+    font-weight: 600;
+    color: #0088ad;
+    text-align: center;
+    margin-right: 50px;
+}
+
+.notfound-page {
+    font-family: 'montserrat', 'arial', sans-serif;
+    font-style: normal;
+}
+
+.notfound-404 {
+    font-size: 54px;
+    font-weight: 600;
+    color: #555555;
+    text-align: center;
+    letter-spacing: -15px;
+}
+
+.notfound-0 {
+    font-size: 108px;
+    font-weight: 600;
+    color: #0088ad;
+}
+
+.notfound-text {
+    font-size: 24px;
+    font-weight: 400;
+    color: #8c8c8c;
+    letter-spacing: -0.8px;
+}
+
 .mobile-label-btn,
 .mobile-input-btn {
     display: none;

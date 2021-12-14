@@ -43,6 +43,15 @@ const routes = [
         path: '/cv',
         name: 'CV',
         component: () => import('@views/CV.vue')
+    },
+    {
+        path: '/404',
+        name: 'NotFound',
+        component: () => import('@views/NotFound.vue')
+    },
+    {
+        path: '*',
+        redirect: '/404'
     }
 ]
 
