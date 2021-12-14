@@ -28,17 +28,25 @@ export default {
       type: Array,
       default: null,
     },
+    favorites: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {};
   },
-  async mounted() {},
+  async mounted() {
+  },
   methods: {
     async delItem(id) {
       try {
         await this.$store.dispatch("delVacancy", id);
       } catch (err) {
         console.log(err);
+      }
+      if (this.favorites) {
+        location.reload();
       }
     },
     async pinItem(id, pinned) {
@@ -47,13 +55,16 @@ export default {
       } catch (err) {
         console.log(err);
       }
+      if (this.favorites) {
+        location.reload();
+      }
     },
   },
   computed: {
     ...mapGetters({ items: "vacancies_getter" }),
     itemsList: function () {
       return this.sortedItems ? this.sortedItems : this.items;
-    },
+    }
   },
 };
 </script>

@@ -16,11 +16,11 @@
     <transition v-if="item.show" name="show-side">
       <div >
         <div >
-          <div class="settings__activeLogin">
+          <div class="settings__activeLogin" v-if="item.type != 'file'">
             текущее значение: <span>{{ item.name === 'birthday' ? user[item.name].substring(0, 10) : user[item.name] }}</span>
           </div>
           <div>
-            <div class="settings__login_edit" v-if="item.type != 'radio'">
+            <div class="settings__login_edit" v-if="item.type != 'radio' && item.type != 'file'">
               <input
                   v-model="item.value"
                   placeholder="Введите новое значение"
@@ -54,13 +54,24 @@
                 >
               </div>
             </div>
+            <div class="settings__login_edit" v-if="item.type == 'file'">
+              <div class="settings__photo_item">
+                <img v-if="user.photo_url" :src="user.photo_url" alt="user_photo" class="settings__img">
+                <input ref="photo"
+                  name="item.name"
+                  :type="item.type"
+                  id='photo_file'
+                  required
+                >
+              </div>
+            </div>
           </div>
         </div>
         <div >
           <div class="button__wrapper" >
             <button
                 type="button"
-                @click="change"
+                @click="change()"
             >
               Сохранить
             </button>
@@ -77,13 +88,25 @@ import { mapGetters } from "vuex";
 export default {
   name: "SettingItem",
   components: { SvgArrowUp },
-  data: () => ({}),
+  data: () => ({
+  }),
   props: {
     item: { type: Object, default: () => ({}) }
   },
   methods:{
     async change() {
-      await this.$store.dispatch("updateUser", { id: this.user.id, newParam: { [this.item.name]: this.item.value }});
+      if (this.item.type == 'file') {
+        const selectedImage = this.$refs.photo.files[0];
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          const image = e.target.result;
+          await this.$store.dispatch("updateUserPhoto", { id: this.user.id, photo: image});
+        };
+        reader.readAsDataURL(selectedImage);
+      }
+      else {
+        await this.$store.dispatch("updateUser", { id: this.user.id, newParam: { [this.item.name]: this.item.value }});
+      }
     }
   },
   computed: {
@@ -187,5 +210,20 @@ export default {
      width: 20px;
      height: 20px;
     background: url(https://snipp.ru/demo/495/no-view.svg) 0 0 no-repeat;
+  }
+  .settings__photo_item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .settings__img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    object-position: center center;
+    border: 1px solid #c7b299;
+    border-radius: 5px;
+    margin-top: 50px;
+    box-shadow: 2px 2px 10px 1px rgba(34, 60, 80, 0.16);
   }
 </style>

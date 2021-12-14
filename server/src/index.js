@@ -1,6 +1,5 @@
 const express = require('express');
 const serveStatic = require('serve-static');
-const nodeFetch = require('node-fetch');
 const history = require('connect-history-api-fallback');
 var path = require('path');
 const dataBaseCreate = require('./modules/dataBaseHandler');
@@ -13,6 +12,7 @@ app.use(express.static(`${__dirname}/../../dist`));
 app.use(serveStatic(__dirname + "/../../dist"));
 app.use(express.json({limit: '50mb'}));
 app.use(history());
+
 
 let dataBase;
 dataBaseCreate().then((res) => (dataBase = res));
@@ -43,6 +43,9 @@ app.post('/user', async (req, res) => {
 });
 app.put('/user/:id', async (req, res) => {
     handleRequest(dataBase, req, res, 'updateUser');
+});
+app.post('/user_photo/:id', async (req, res) => {
+    handleRequest(dataBase, req, res, 'updateUserPhoto');
 });
 app.get('/provider', async (req, res) => {
     handleRequest(dataBase, req, res, 'provider');

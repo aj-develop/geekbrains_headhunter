@@ -1,7 +1,7 @@
 import { Provider } from '@domain/Provider.js';
 import { Vacancy } from '@domain/Vacancy.js';
 import { instance as api } from "@api";
-import { CITY } from './ catalog';
+import { CITY, PROFESSION } from './ catalog';
 
 export class SuperJobProvider extends Provider {
     static name = 'superJob';
@@ -28,6 +28,9 @@ export class SuperJobProvider extends Provider {
         url = `keyword=${filter.text}&` + `count=${filter.count}`;
         if (filter.city) {
             url += `&town=${CITY[filter.city]}`;
+        }
+        if (filter.profession) {
+            url += `&catalogues=${PROFESSION[filter.profession]}`;
         }
         return url;
     }
