@@ -591,6 +591,7 @@ header{
 
 .profession-multiple-item .selected{
     font-weight: 600;
+    color: #0088ad;
 }
 
 .profession-multiple-item a, 

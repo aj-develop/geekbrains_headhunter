@@ -7,6 +7,7 @@
       <h2 class="profile__title">Найди вакансию своей мечты</h2>
       <Search />
       <div class="profile__content">
+        <img v-if="user.photo_url" :src="user.photo_url" alt="user_photo" class="profile__img">
         <p>
           <span>логин: </span
           ><span class="profile__data">{{ user.login }}</span>
@@ -114,5 +115,16 @@ export default {
 .profile__button:hover {
   background-color: #0088ad;
   color: white;
+}
+
+.profile__img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center center;
+  border: 1px solid #c7b299;
+  border-radius: 5px;
+  align-self: center;
+  margin: 5px 5px 20px 5px;
 }
 </style>

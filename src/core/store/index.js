@@ -64,6 +64,21 @@ export default new Vuex.Store({
                 console.log("==> change user failure " + err);
             }
         },
+        async updateUserPhoto({ commit }, payload) {
+            try {
+                const { id, photo } = payload;
+                const res = await api.post("/user_photo/" + id, { photo });
+                const { result, status } = res.data;
+                if (status == "ok") {
+                    const newUser = { ...this.state.user, photo_url: result.url }
+                    commit('setUser', newUser);
+                }
+                return res.data;
+            } catch (err) {
+                console.log("==> change user photo failure " + err);
+                return null;
+            }
+        },
         async login({ commit }, data) {
             try {
                 const response = await api.post('/user', { user: encrypt(`${data.login}:${data.password}:${data.action}`) });
@@ -143,7 +158,9 @@ export default new Vuex.Store({
         userLogin_getter: state => state.userLogin,
         user_getter: state => state.user,
         vacancies_getter: state => state.vacancies,
-        vacancyById_getter: state => (id) => { return state.vacancies.find(vacancy => vacancy.origin_id == id) }
+        vacancyById_getter: state => (id) => { return state.vacancies.find(vacancy => vacancy.origin_id == id) },
+        vacanciesFavorite_getter: state => { return state.vacancies.filter(vacancy => vacancy.pinned == true) },
+        vacanciesFvrtCnt_getter: state => { return state.vacancies.filter(vacancy => vacancy.pinned == true).length }
     },
     plugins: [new VuexPersistence().plugin]
 })

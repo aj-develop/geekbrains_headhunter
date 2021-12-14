@@ -43,7 +43,7 @@ export default {
         const searchResult = [];
         const filter = SearchFilter.byText(this.vacancyText);
         filter.city = this.selectedCity;
-        filter.specialization = this.selectedProfession;
+        filter.profession = this.selectedProfession;
         for (let provider in PROVIDERS){
           const res = PROVIDERS[provider].find(filter);
           if (res){
