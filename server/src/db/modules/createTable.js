@@ -62,6 +62,7 @@ module.exports = async (dbConnection) => {
             address varchar(255) DEFAULT null,
             phone varchar(32) DEFAULT null,
             email varchar(64) DEFAULT null,
+            photo_url varchar(255) DEFAULT null,
             role int2 DEFAULT 1
           )`;
         const result = await createTable(dbConnection, sqlTableUsers, DB_CONFIG.tableUsers);

@@ -93,6 +93,7 @@ export default {
       password: { value: '', show: false, rus: 'пароль'}
     },
     settingsAll: [
+      { name: 'photo_url', value: '', show: false, rus: 'фото', type: 'file' },
       { name: 'login', value: '', show: false, rus: 'логин', type: 'text' },
       { name: 'first_name', value: '', show: false, rus: 'имя', type: 'text' },
       { name: 'last_name', value: '', show: false, rus: 'фамилия', type: 'text' },
@@ -108,7 +109,8 @@ export default {
     passwordConfirmFiledType: 'password',
     passwordShow: false,
     passwordShowNew: false,
-    passwordShowConfirm: false
+    passwordShowConfirm: false,
+    photo_file: ''
   }),
   computed: {
     ...mapGetters({ userLogin: "userLogin_getter" }),
@@ -146,7 +148,7 @@ export default {
         this.passwordConfirmFiledType = 'password'
         this.passwordShowConfirm = false;
       }
-    }
+    },
   }
 }
 </script>

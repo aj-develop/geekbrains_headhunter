@@ -76,7 +76,13 @@
         </div>
       </div>
       <div class="vacancies">
-        <ItemsList :type="view" :sortedItems="sortedItems" />
+        <div class="vacancies-list-title">
+          <h3>Избранные вакансии</h3>
+        </div>
+        <div v-if="!itemsFavorite.length" class="vacancies-empty">
+          вы еще не добавили ни одну вакансию в Избранное
+        </div>
+        <ItemsList :type="view" :sortedItems="sortedItems" :favorites="true" v-if="itemsFavorite.length"/>
       </div>
     </main>
     <Footer />
@@ -97,7 +103,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default {
-  name: "VacansiesList",
+  name: "VacansiesListFavorite",
   data() {
     return {
       angleIcon: faCaretRight,
@@ -106,19 +112,22 @@ export default {
       selectedTime: "descendingTime",
       selectedSalary: "descendingSalary",
       view: "large",
-      sortedItems: this.items,
+      sortedItems: this.itemsFavorite,
       remote: false,
       no_experience: false,
     };
   },
   components: { ItemsList, Header, Footer, FontAwesomeIcon },
+  mounted () {
+    this.sortedItems = this.itemsFavorite;
+  },
   methods: {
     sortChange(event) {
       const idx = event.target.options.selectedIndex;
       this.sortedItems.sort(SORTER[event.target.options[idx].value]);
     },
     filterChange() {
-      this.sortedItems = this.items.filter((vacancy) => {
+      this.sortedItems = this.itemsFavorite.filter((vacancy) => {
         if (this.remote && !this.no_experience) {
           return vacancy.remote == this.remote;
         } else if (this.no_experience && !this.remote) {
@@ -135,7 +144,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({ items: "vacancies_getter" }),
+    ...mapGetters({ itemsFavorite: "vacanciesFavorite_getter" })
   },
 };
 </script>

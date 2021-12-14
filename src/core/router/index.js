@@ -11,7 +11,7 @@ const routes = [
     },
     {
         path: '/vacancies_list',
-        name: 'VacansiesList',
+        name: 'VacanciesList',
         component: () => import('@views/VacanciesList.vue')
     },
     {
@@ -33,6 +33,16 @@ const routes = [
         path: '/vacancy/:id',
         name: 'Vacancy',
         component: () => import('@views/Vacancy.vue')
+    },
+    {
+        path: '/vacancies_favorite',
+        name: 'VacanciesListFavorite',
+        component: () => import('@views/VacanciesListFavorite.vue')
+    },
+    {
+        path: '/cv',
+        name: 'CV',
+        component: () => import('@views/CV.vue')
     }
 ]
 

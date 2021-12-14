@@ -3,7 +3,7 @@ export class SearchFilter {
         this.text = null;
         this.city = null;
         this.salary = null;
-        this.specialization = null;
+        this.profession = null;
         this.count = 20;
     }
     static byText(text) {
@@ -16,9 +16,9 @@ export class SearchFilter {
         filter.city = city;
         return filter;            
     }
-    static bySpecialization(specialization) {
+    static byProfession(profession) {
         let filter = new SearchFilter();
-        filter.specialization = specialization;
+        filter.profession = profession;
         return filter;            
     }
 }

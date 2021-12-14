@@ -11,7 +11,7 @@
         <a href="#">Вопросы и ответы</a>
         <a href="#">Поддержка</a>
       </div>
-      <div>
+      <div class="footer-icon">
         <a href="#">
         <font-awesome-icon :icon="['fab', 'instagram']" class="social-icon"/>
         </a>

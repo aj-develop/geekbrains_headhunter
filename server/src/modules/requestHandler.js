@@ -12,7 +12,8 @@ const ACTIONS = {
     delAll: vacancy.delAllFromDB,
     update: vacancy.updateDB,
     getUser: user.getFromDB,
-    updateUser: user.updateDB
+    updateUser: user.updateDB,
+    updateUserPhoto: user.updateFileDB,
 }
 
 module.exports = async (dataBase, req, res, action) => {
@@ -30,7 +31,8 @@ module.exports = async (dataBase, req, res, action) => {
             const curToken = authorization.replace('bearer ', '');
             const curUser = await user.getFromDB(dataBase, { sessionid: curToken });
             if (curUser && token.checkToken(curUser)) {
-                const payload = action === 'getUser' ? { login: curUser.login } : { user_id: curUser.id };
+                const payload = action === 'getUser' || action === 'updateUserPhoto'
+                    ? { login: curUser.login } : { user_id: curUser.id};
                 const result = await ACTIONS[action](dataBase, payload, req);
                 if (result) {
                     action === 'getUser'

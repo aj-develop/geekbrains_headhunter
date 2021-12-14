@@ -59,7 +59,10 @@
           <div class="dropdown__menu" v-show="isOpen">
             <router-link to="/profile"> Профиль</router-link>
             <router-link to="/settings"> Настройки</router-link>
-            <router-link to="/profile"> Избранное</router-link>
+            <router-link to="/vacancies_favorite"> Избранное
+              <span class="favoritesCnt" v-if="favoritesCnt"> {{ favoritesCnt }} </span>
+            </router-link>
+            <router-link to="/cv"> Резюме</router-link>
             <hr />
             <a @click="logout">Выход</a>
           </div>
@@ -96,6 +99,10 @@ export default {
   },
   computed: {
     ...mapGetters({ userLogin: "userLogin_getter" }),
+    ...mapGetters({ itemsFavorite: "vacanciesFavorite_getter" }),
+    favoritesCnt: function() {
+      return this.itemsFavorite.length;
+    }
   },
 };
 </script>
@@ -129,5 +136,18 @@ export default {
   border: 1px solid #ccc !important;
   width: 100%;
   margin: 10px 0 5px;
+}
+.favoritesCnt {
+  margin-left: 5px;
+  padding-top: 2px;
+  background-color: #c7b299;
+  font-size: 10px;
+  font-weight: 600;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  color: #555;
 }
 </style>
