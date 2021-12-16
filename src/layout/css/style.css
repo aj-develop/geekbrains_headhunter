@@ -107,7 +107,7 @@ body{
     width: 100%;
     max-width: 1920px;
     margin: 0 auto;
-    min-width: 370px;
+    min-width: 330px;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -811,6 +811,8 @@ header{
     border: 1px dashed #999;
     padding: 30px 45px 30px 20px;
     margin-bottom: 14px;
+    margin-top: 10px;
+
 }
 
 .about-company-presskit-list {
@@ -890,6 +892,7 @@ header{
     color: #0088ad;
     text-align: center;
     margin-right: 50px;
+    margin-left: 10px;
 }
 
 .notfound-page {
@@ -916,6 +919,7 @@ header{
     font-weight: 400;
     color: #8c8c8c;
     letter-spacing: -0.8px;
+    margin-right: 10px;
 }
 
 .mobile-label-btn,
@@ -938,7 +942,7 @@ header{
     }
 
     .tagline-txt {
-        font-size:30px;
+        font-size:28px;
     }
 
     .tagline {
@@ -948,6 +952,23 @@ header{
 
     .footer-lower-block {
         text-align: center;
+    }
+
+    .notfound-smile {
+        font-size: 50px;
+    }
+
+    .notfound-404 {
+        font-size: 34px;
+        letter-spacing: -10px;
+    }
+
+    .notfound-0 {
+        font-size: 68px;
+    }
+
+    .notfound-text {
+        font-size: 16px;
     }
 }
 
@@ -1049,7 +1070,7 @@ header{
     }
 
     .list-item-link {
-        font-size: 18px;
+        font-size: 15px;
     }
 
     .for-mobile {
@@ -1058,6 +1079,10 @@ header{
 
     .main-footer div {
         padding-top: 40px;
+    }
+
+    .about-company-item-title {
+        font-size: 28px;
     }
 
     .footer-lower {

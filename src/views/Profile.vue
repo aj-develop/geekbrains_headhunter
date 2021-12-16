@@ -7,37 +7,41 @@
       <h2 class="profile__title">Найди вакансию своей мечты</h2>
       <Search />
       <div class="profile__content">
-        <img v-if="user.photo_url" :src="user.photo_url" alt="user_photo" class="profile__img">
+        <img
+          v-if="user.photo_url"
+          :src="user.photo_url"
+          alt="user_photo"
+          class="profile__img"
+        />
         <p>
-          <span>логин: </span
-          ><span class="profile__data">{{ user.login }}</span>
+          <span>логин: </span>
+          <span class="profile__data">{{ user.login }}</span>
         </p>
         <p v-if="user.first_name">
-          <span>имя: </span
-          ><span class="profile__data">{{ user.first_name }}</span>
+          <span>имя: </span>
+          <span class="profile__data">{{ user.first_name }}</span>
         </p>
         <p v-if="user.last_name">
-          <span>фамилия: </span
-          ><span class="profile__data">{{ user.last_name }}</span>
+          <span>фамилия: </span>
+          <span class="profile__data">{{ user.last_name }}</span>
         </p>
         <p v-if="user.phone">
-          <span>телефон: </span
-          ><span class="profile__data">{{ user.phone }}</span>
+          <span>телефон: </span>
+          <span class="profile__data">{{ user.phone }}</span>
         </p>
         <p v-if="user.email">
-          <span>e-mail: </span
-          ><span class="profile__data">{{ user.email }}</span>
+          <span>e-mail: </span>
+          <span class="profile__data">{{ user.email }}</span>
         </p>
         <p v-if="user.city">
-          <span>город: </span><span class="profile__data">{{ user.city }}</span>
+          <span>город: </span>
+          <span class="profile__data">{{ user.city }}</span>
         </p>
         <p v-if="user.address">
-          <span>адрес: </span
-          ><span class="profile__data">{{ user.address }}</span>
+          <span>адрес: </span>
+          <span class="profile__data">{{ user.address }}</span>
         </p>
-        <router-link to="/settings" class="profile__button"
-          >изменить</router-link
-        >
+        <router-link to="/settings" class="profile__button">изменить</router-link>
       </div>
       <ItemsList />
     </main>
@@ -84,11 +88,16 @@ export default {
 }
 
 .profile__content p {
-  width: 40%;
+  width:100%;
+  max-width: 750px;
   display: flex;
   justify-content: space-between;
   align-self: center;
   margin-bottom: 10px;
+}
+
+.profile__content p > span {
+    margin: 0 10px;
 }
 
 .profile__data {
@@ -127,4 +136,5 @@ export default {
   align-self: center;
   margin: 5px 5px 20px 5px;
 }
+
 </style>
