@@ -69,7 +69,7 @@
               <div class="cv__radio_item">
                 <label for="hasExperience">есть опыт</label>
                 <input class="cv__input"
-                  v-model="showExperience"
+                  v-model="cv.hasExperience"
                   :value='true'
                   type="radio"
                   id='hasExperience'
@@ -78,7 +78,7 @@
               <div class="cv__radio_item">
                 <label for="noExperience">нет опыта</label>
                 <input class="cv__input"
-                  v-model="showExperience"
+                  v-model="cv.hasExperience"
                   :value='false'
                   type="radio"
                   id='noExperience'
@@ -87,9 +87,21 @@
             </div>
           </div>
         </section>
-        <section class="cv__section" v-if="showExperience">
+        <section class="cv__section" v-if="cv.hasExperience">
           <h3>Опыт работы</h3>
-          <textarea v-model="cv.experience" class="cv__textarea"/>
+          <div  v-if="!cv.experience.length" class="cv__section_item">
+            <span>1 </span>
+            <textarea v-model.lazy="cv.experience[0]" class="cv__textarea"
+            placeholder="место работы, должность, обязанности"/>
+          </div>
+          <div  v-for="(exp, index) in cv.experience" :key="index" class="cv__section_item">
+            <span>{{ index + 1 }} </span>
+            <textarea v-model.lazy="cv.experience[index]" class="cv__textarea"
+            placeholder="место работы, должность, обязанности"/>
+          </div>
+          <button class="cv__button" @click="add('experience')">
+            добавить
+          </button>
         </section>
         <section class="cv__section">
           <h3>Специальность</h3>
@@ -97,15 +109,36 @@
             <label>желаемая должность: </label>
             <input v-model="cv.profession" class="profile__data" type="text"/>
           </p>
+          <p>
+            <label>зарплата: </label>
+            <input v-model="cv.salary" class="profile__data" type="text"/>
+          </p>
         </section>
         <section class="cv__section">
           <h3>Образование</h3>
-          <textarea v-model="cv.education" class="cv__textarea"/>
+          <div  v-if="!cv.education.length" class="cv__section_item">
+            <span>1 </span>
+            <textarea v-model.lazy="cv.education[0]" class="cv__textarea"
+            placeholder="учебное заведение, специальность"/>
+          </div>
+          <div  v-for="(edu, index) in cv.education" :key="index" class="cv__section_item">
+            <span>{{ index + 1 }} </span>
+            <textarea v-model.lazy="cv.education[index]" class="cv__textarea"
+            placeholder="учебное заведение, специальность"/>
+          </div>
+          <button class="cv__button" @click="add('education')">
+            добавить
+          </button>
         </section>
         <section class="cv__section">
           <h3>Дополнительная информация</h3>
-          <textarea v-model="cv.additionally" class="cv__textarea"/>
+          <textarea v-model="cv.additionally" class="cv__textarea"
+          placeholder="напишите о себе"/>
         </section>
+        <div class="cv__success" :class="{ show: showSuccess }">ваше резюме сохранено</div>
+        <button class="cv__button_save" @click="save">
+          сохранить
+        </button>
       </div>
     </main>
     <Footer />
@@ -132,22 +165,50 @@ export default {
         gender: '',
         address: '',
         profession: '',
-        education: '',
+        salary: '',
+        hasExperience: false,
+        experience: [],
+        education: [],
         additionally: ''
       },
-      showExperience: false
+      showSuccess: false
     }
   },
   mounted() {
-    Object.keys(this.user).forEach((key) => {
-      if (this.user[key] !== null) {
-        this.cv[key] = this.user[key];
+    const currentCV = this.curCV ? this.curCV : this.user;
+    Object.keys(currentCV).forEach((key) => {
+      if (currentCV[key] !== null && key in this.cv) {
+        this.cv[key] = currentCV[key];
       }
     })
     this.cv.birthday = this.cv.birthday.substring(0, 10);
   },
+  methods: {
+    add(param) {
+      if (this.cv[param][0] && this.cv[param][this.cv[param].length - 1])
+      {
+        this.cv[param].push('');
+      }
+    },
+    async save() {
+      if (!this.cv.hasExperience) {
+        this.cv.experience = [];
+      }
+      const res = await this.$store.dispatch("updateUser", { id: this.user.id, newParam: { cv: JSON.stringify(this.cv) }});
+      if (res) {
+        this.showSuccess = true;
+        setTimeout( () => this.showSuccess = false, 2000 );
+      }
+    },
+  },
   computed: {
     ...mapGetters({ user: "user_getter" }),
+    curCV: function () {
+      if  (!this.user.cv) {
+        return null;
+      }
+      return typeof(this.user.cv) == 'string' ? JSON.parse(this.user.cv) : this.user.cv;
+    }
   },
 };
 </script>
@@ -191,6 +252,7 @@ export default {
   border: 1px solid #0088ad;
   border-radius: 5px;
   color: #0088ad;
+  background-color: #fbfaf8;
   font-family: "raleway", "arial", sans-serif;
   font-size: 12px;
   font-weight: 400;
@@ -230,6 +292,7 @@ export default {
 }
 
 .cv__textarea {
+  font-family: "montserrat", "arial", sans-serif;
   width: 100%;
   border: 1px solid #c7b299;
   border-radius: 3px;
@@ -250,6 +313,10 @@ export default {
   margin: 30px 0;
 }
 
+.cv__section_item span {
+  margin-right: 10px;
+}
+
 .cv__radio {
   display: flex;
   width: 50%;
@@ -258,6 +325,34 @@ export default {
 .cv__radio_item {
   margin-right: 30px;
   font-size: 16px;
+}
+
+.cv__button_save{
+    padding: 10px;
+    background: #555555;
+    color: #fff;
+    outline: none;
+    border: none;
+    margin: 10px 0;
+    width: 210px;
+    align-self: center;
+  }
+
+.cv__button_save:hover{
+    cursor: pointer;
+    background: #c7b299;
+    border-color: #c7b299;
+    transition: 2s;
+}
+
+.cv__success {
+  align-self: center;
+  color: #0088ad;
+  visibility: hidden;
+}
+
+.show {
+  visibility: visible;
 }
 
 </style>

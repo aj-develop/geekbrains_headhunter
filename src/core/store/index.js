@@ -60,8 +60,10 @@ export default new Vuex.Store({
                     const newUser = { ...this.state.user, [Object.keys(newParam)[0]]: Object.values(newParam)[0] }
                     commit('setUser', newUser);
                 }
+                return res.data;
             } catch (err) {
                 console.log("==> change user failure " + err);
+                return null;
             }
         },
         async updateUserPhoto({ commit }, payload) {
