@@ -55,7 +55,7 @@
               <h2 class="about-company-page-h2">Пресс-центр</h2>
               <ul class="about-company-presskit-list">
                 <li class="about-company-presskit-item">
-                  <h3 class="about-company-page-h3">Элла Остпенко</h3>
+                  <h3 class="about-company-page-h3">Элла Остапенко</h3>
                   <span class="about-company-page-text">Руководитель пресс-службы</span>
                   <span class="about-company-page-text">+7 (495) 325-56-89</span>
                   <a class="about-company-page-link" href="mailto:pr@msk.hh.ru">pr@msk.hh.ru</a>
