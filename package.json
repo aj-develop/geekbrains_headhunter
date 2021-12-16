@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "cp dist/*.jpg public/ && vue-cli-service serve",
-    "build": "cp dist/*.jpg public/ && vue-cli-service build && (cd server && npm install)",
+    "serve": "npm run cp && vue-cli-service serve",
+    "build": "npm run cp && vue-cli-service build && (cd server && npm install)",
     "lint": "vue-cli-service lint",
     "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
-    "start": "cd server && npm start"
+    "start": "cd server && npm start",
+    "cp": "node cp.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
