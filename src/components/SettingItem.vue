@@ -17,7 +17,8 @@
       <div >
         <div >
           <div class="settings__activeLogin" v-if="item.type != 'file'">
-            текущее значение: <span>{{ item.name === 'birthday' ? user[item.name].substring(0, 10) : user[item.name] }}</span>
+            текущее значение: 
+            <span>{{ item.name === 'birthday' && user[item.name] ? user[item.name].substring(0, 10) : user[item.name] }}</span>
           </div>
           <div>
             <div class="settings__login_edit" v-if="item.type != 'radio' && item.type != 'file'">
