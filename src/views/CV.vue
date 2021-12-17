@@ -139,20 +139,109 @@
         <button class="cv__button_save" @click="save">
           сохранить
         </button>
+        <button v-if="curCV" class="cv__button_save" @click="generateReport">
+          скачать pdf
+        </button>
       </div>
     </main>
     <Footer />
+    <vue-html2pdf
+        :show-layout="false"
+        :float-layout="true"
+        :enable-download="true"
+        :preview-modal="true"
+        :paginate-elements-by-height="1400"
+        :filename="'cv_' + user.login"
+        :pdf-quality="2"
+        :manual-pagination="false"
+        pdf-format="a4"
+        pdf-orientation="portrait"
+        pdf-content-width="800px"
+        ref="cv2pdf"
+      >
+        <section slot="pdf-content" class="pdf-content">
+          <section class="pdf-header">
+            <img v-if="user.photo_url" :src="user.photo_url" alt="user_photo" class="pdf-img">
+            <div class="pdf-profession">
+              <div v-if="cv.profession">{{ cv.profession }}</div>
+              <div v-if="cv.salary">{{ cv.salary }}</div>
+            </div>
+          </section>
+          <section class="pdf-item">
+            <h4 class="pdf-title">Контактные данные</h4>
+            <ul>
+              <li v-if="cv.first_name">
+                имя: <span>{{ cv.first_name }}</span>
+              </li>
+              <li v-if="cv.last_name">
+                фамилия: <span>{{ cv.last_name }}</span>
+              </li>
+              <li v-if="cv.phone">
+                телефон: <span>{{ cv.phone }}</span>
+              </li>
+              <li v-if="cv.email">
+                e-mail: <span>{{ cv.email }}</span>
+              </li>
+              <li v-if="cv.city">
+                город: <span>{{ cv.city }}</span>
+              </li>
+              <li v-if="cv.address">
+                адрес: <span>{{ cv.address }}</span>
+              </li>
+            </ul>
+          </section>
+          <hr class="pdf-hr"/>
+          <section v-if="cv.birthday || cv.gender" class="pdf-item">
+            <h4 class="pdf-title">Основная информация</h4>
+            <ul>
+              <li v-if="cv.birthday">
+                дата рождения: <span>{{ cv.birthday }}</span>
+              </li>
+              <li v-if="cv.gender">
+                пол: <span>{{ cv.gender == 'Ж' ? 'женский' : 'мужской' }}</span>
+              </li>
+            </ul>
+          </section>
+          <hr class="pdf-hr"/>
+          <section v-if="cv.hasExperience" class="pdf-item">
+            <h4 class="pdf-title">Опыт работы</h4>
+            <ol>
+              <li  v-for="(exp, index) in cv.experience" :key="index" >
+                {{ exp }}
+              </li>
+            </ol>
+          </section>
+          <hr class="pdf-hr"/>
+          <section v-if="cv.education.length" class="pdf-item">
+            <h4 class="pdf-title">Образование</h4>
+            <ol>
+              <li  v-for="(edu, index) in cv.education" :key="index" >
+                {{ edu }}
+              </li>
+            </ol>
+          </section>
+          <hr class="pdf-hr"/>
+          <section v-if="cv.additionally" class="pdf-item">
+            <h4 class="pdf-title">Дополнительная информация</h4>
+            <div>
+              {{ cv.additionally }}
+            </div>
+          </section>
+        </section>
+      </vue-html2pdf>
   </div>
 </template>
 
 <script>
+
 import Header from "@components/Header.vue";
 import Footer from "@components/Footer.vue";
+import VueHtml2pdf from 'vue-html2pdf';
 import { mapGetters } from "vuex";
 
 export default {
   name: "CV",
-  components: { Header, Footer },
+  components: { Header, Footer, VueHtml2pdf },
   data() {
     return {
       cv: {
@@ -200,6 +289,9 @@ export default {
         setTimeout( () => this.showSuccess = false, 2000 );
       }
     },
+    generateReport () {
+        this.$refs.cv2pdf.generatePdf();
+    }
   },
   computed: {
     ...mapGetters({ user: "user_getter" }),
@@ -353,6 +445,82 @@ export default {
 
 .show {
   visibility: visible;
+}
+
+.pdf-title {
+  font-family: "montserrat", "arial", sans-serif;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #555555;
+}
+
+.pdf-content {
+  font-family: "montserrat", "arial", sans-serif;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 20px 0;
+}
+
+.pdf-item {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-bottom: 30px;
+}
+
+.pdf-item li {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  margin-bottom: 10px;
+}
+
+.profile__img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center center;
+  border: 1px solid #c7b299;
+  border-radius: 5px;
+  align-self: center;
+  margin: 5px 5px 20px 5px;
+}
+
+.pdf-hr {
+  color: #e2e1e1;
+  width: 50%;
+  align-self: center;
+}
+
+.pdf-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  object-position: center center;
+  border: 1px solid #e2e1e1;
+  border-radius: 5px;
+  align-self: center;
+  margin: 5px 5px 20px 5px;
+}
+
+.pdf-header {
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+}
+
+.pdf-profession {
+  font-weight: 600;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 </style>
